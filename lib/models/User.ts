@@ -1,18 +1,18 @@
-import mongoose, { Schema, models, model, Document } from 'mongoose'
+import mongoose, { Schema, models, model, Document, Types } from 'mongoose'
 
 export interface IUser extends Document {
   email: string
-  hashedPassword: string | null
+  hashedPassword: string
   firstName: string
   lastName: string
   phone: string
   company: string
-  role: string
+  role: string                              // job title (free text)
+  systemRole: 'admin' | 'manager' | 'user' // access control role
+  isActive: boolean
   location: string
   bio: string
-  // OAuth fields
-  oauthProvider: 'google' | 'github' | null
-  oauthId: string | null
+  teamId: Types.ObjectId | null
   avatar: string | null
   notifications: {
     email: boolean
@@ -24,6 +24,8 @@ export interface IUser extends Document {
   }
   appearance: {
     language: string
+    theme: 'light' | 'dark' | 'system'
+    sidebarCollapsed: boolean
     timezone: string
     dateFormat: string
   }
@@ -32,15 +34,20 @@ export interface IUser extends Document {
 const UserSchema = new Schema<IUser>(
   {
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    hashedPassword: { type: String, default: null },
-    oauthProvider: { type: String, enum: ['google', 'github', null], default: null },
-    oauthId: { type: String, default: null },
+    hashedPassword: { type: String, required: true },
     avatar: { type: String, default: null },
     firstName: { type: String, default: '' },
     lastName: { type: String, default: '' },
     phone: { type: String, default: '' },
     company: { type: String, default: '' },
     role: { type: String, default: '' },
+    systemRole: {
+      type: String,
+      enum: ['admin', 'manager', 'user'],
+      default: 'user',
+    },
+    isActive: { type: Boolean, default: true },
+    teamId: { type: Schema.Types.ObjectId, ref: 'Team', default: null },
     location: { type: String, default: '' },
     bio: { type: String, default: '' },
     notifications: {
@@ -53,6 +60,8 @@ const UserSchema = new Schema<IUser>(
     },
     appearance: {
       language: { type: String, default: 'en' },
+      theme: { type: String, enum: ['light', 'dark', 'system'], default: 'dark' },
+      sidebarCollapsed: { type: Boolean, default: false },
       timezone: { type: String, default: 'pst' },
       dateFormat: { type: String, default: 'mdy' },
     },

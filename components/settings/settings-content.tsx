@@ -33,8 +33,12 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { updateProfile } from "@/lib/features/auth/authSlice"
+import { useTranslations } from "next-intl"
 
 function ProfileTab() {
+  const t = useTranslations("Settings.profile")
+  const tt = useTranslations("Toasts")
+  const common = useTranslations("Common")
   const dispatch = useAppDispatch()
   const user = useAppSelector((s) => s.auth.user)
 
@@ -49,7 +53,6 @@ function ProfileTab() {
     bio: "",
   })
 
-  // Sync form with user data after mount (avoids hydration mismatch)
   useEffect(() => {
     if (user) {
       setForm({
@@ -72,9 +75,9 @@ function ProfileTab() {
   async function handleSave() {
     const result = await dispatch(updateProfile(form))
     if (updateProfile.fulfilled.match(result)) {
-      toast.success("Profile saved")
+      toast.success(t("saveSuccess"))
     } else {
-      toast.error("Failed to save profile")
+      toast.error(t("saveError"))
     }
   }
 
@@ -83,9 +86,9 @@ function ProfileTab() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-semibold text-foreground">Profile Information</h3>
+        <h3 className="text-sm font-semibold text-foreground">{t("title")}</h3>
         <p className="text-xs text-muted-foreground mt-1">
-          Update your personal details and contact information.
+          {t("sub")}
         </p>
       </div>
       <Separator />
@@ -98,22 +101,22 @@ function ProfileTab() {
         </Avatar>
         <div className="space-y-1">
           <Button variant="outline" size="sm">
-            Change Avatar
+            {t("changeAvatar")}
           </Button>
-          <p className="text-xs text-muted-foreground">JPG, PNG or GIF. Max 2MB.</p>
+          <p className="text-xs text-muted-foreground">{t("avatarHint")}</p>
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="firstName" className="text-xs text-muted-foreground">
-            First Name
+            {t("firstName")}
           </Label>
           <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} className="bg-secondary" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="lastName" className="text-xs text-muted-foreground">
-            Last Name
+            {t("lastName")}
           </Label>
           <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} className="bg-secondary" />
         </div>
@@ -123,7 +126,7 @@ function ProfileTab() {
         <Label htmlFor="email" className="text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <Mail className="size-3" />
-            Email Address
+            {t("email")}
           </span>
         </Label>
         <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} className="bg-secondary" />
@@ -133,7 +136,7 @@ function ProfileTab() {
         <Label htmlFor="phone" className="text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <Phone className="size-3" />
-            Phone Number
+            {t("phone")}
           </span>
         </Label>
         <Input id="phone" name="phone" type="tel" value={form.phone} onChange={handleChange} className="bg-secondary" />
@@ -144,14 +147,14 @@ function ProfileTab() {
           <Label htmlFor="company" className="text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <Building2 className="size-3" />
-              Company
+              {t("company")}
             </span>
           </Label>
           <Input id="company" name="company" value={form.company} onChange={handleChange} className="bg-secondary" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="role" className="text-xs text-muted-foreground">
-            Role
+            {t("role")}
           </Label>
           <Input id="role" name="role" value={form.role} onChange={handleChange} className="bg-secondary" />
         </div>
@@ -161,7 +164,7 @@ function ProfileTab() {
         <Label htmlFor="location" className="text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <MapPin className="size-3" />
-            Location
+            {t("location")}
           </span>
         </Label>
         <Input id="location" name="location" value={form.location} onChange={handleChange} className="bg-secondary" />
@@ -169,12 +172,12 @@ function ProfileTab() {
 
       <div className="space-y-2">
         <Label htmlFor="bio" className="text-xs text-muted-foreground">
-          Bio
+          {t("bio")}
         </Label>
         <Textarea
           id="bio"
           name="bio"
-          placeholder="Tell us about yourself..."
+          placeholder={t("bioPlaceholder")}
           className="bg-secondary min-h-20 resize-none"
           value={form.bio}
           onChange={handleChange}
@@ -184,7 +187,7 @@ function ProfileTab() {
       <div className="flex justify-end">
         <Button size="sm" className="gap-1.5" onClick={handleSave}>
           <Save className="size-3.5" />
-          Save Changes
+          {common("save")}
         </Button>
       </div>
     </div>
@@ -192,6 +195,7 @@ function ProfileTab() {
 }
 
 function NotificationsTab() {
+  const t = useTranslations("Settings.notifications")
   const dispatch = useAppDispatch()
   const user = useAppSelector((s) => s.auth.user)
 
@@ -204,7 +208,6 @@ function NotificationsTab() {
     weeklyReport: true,
   })
 
-  // Sync with user preferences after mount (avoids hydration mismatch)
   useEffect(() => {
     if (user?.notifications) {
       setPrefs({
@@ -225,36 +228,36 @@ function NotificationsTab() {
   async function handleSave() {
     const result = await dispatch(updateProfile({ notifications: prefs }))
     if (updateProfile.fulfilled.match(result)) {
-      toast.success("Notification preferences saved")
+      toast.success(t("saveSuccess"))
     } else {
-      toast.error("Failed to save preferences")
+      toast.error(t("saveError"))
     }
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-semibold text-foreground">Notification Preferences</h3>
+        <h3 className="text-sm font-semibold text-foreground">{t("title")}</h3>
         <p className="text-xs text-muted-foreground mt-1">
-          Choose how and when you want to be notified.
+          {t("sub")}
         </p>
       </div>
       <Separator />
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Channels
+          {t("channels")}
         </h4>
         <div className="space-y-3">
           <NotificationRow
-            label="Email Notifications"
-            description="Receive notifications via email"
+            label={t("email")}
+            description={t("emailSub")}
             checked={prefs.email}
             onCheckedChange={() => toggle("email")}
           />
           <NotificationRow
-            label="Push Notifications"
-            description="Receive push notifications in browser"
+            label={t("push")}
+            description={t("pushSub")}
             checked={prefs.push}
             onCheckedChange={() => toggle("push")}
           />
@@ -265,24 +268,24 @@ function NotificationsTab() {
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Activity
+          {t("activity")}
         </h4>
         <div className="space-y-3">
           <NotificationRow
-            label="Deal Updates"
-            description="When a deal status or stage changes"
+            label={t("dealUpdates")}
+            description={t("dealUpdatesSub")}
             checked={prefs.dealUpdates}
             onCheckedChange={() => toggle("dealUpdates")}
           />
           <NotificationRow
-            label="Contact Updates"
-            description="When a contact is added or modified"
+            label={t("contactUpdates")}
+            description={t("contactUpdatesSub")}
             checked={prefs.contactUpdates}
             onCheckedChange={() => toggle("contactUpdates")}
           />
           <NotificationRow
-            label="Activity Alerts"
-            description="When new activity is logged for your deals"
+            label={t("activityAlerts")}
+            description={t("activityAlertsSub")}
             checked={prefs.activityAlerts}
             onCheckedChange={() => toggle("activityAlerts")}
           />
@@ -293,12 +296,12 @@ function NotificationsTab() {
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Reports
+          {t("reports")}
         </h4>
         <div className="space-y-3">
           <NotificationRow
-            label="Weekly Summary"
-            description="Receive a weekly email with your CRM summary"
+            label={t("weekly")}
+            description={t("weeklySub")}
             checked={prefs.weeklyReport}
             onCheckedChange={() => toggle("weeklyReport")}
           />
@@ -308,7 +311,7 @@ function NotificationsTab() {
       <div className="flex justify-end">
         <Button size="sm" className="gap-1.5" onClick={handleSave}>
           <Save className="size-3.5" />
-          Save Preferences
+          {t("saveButton")}
         </Button>
       </div>
     </div>
@@ -338,69 +341,81 @@ function NotificationRow({
 }
 
 function AppearanceTab() {
+  const t = useTranslations("Settings.appearance")
+  const tt = useTranslations("Toasts")
+  const common = useTranslations("Common")
   const dispatch = useAppDispatch()
   const user = useAppSelector((s) => s.auth.user)
-  const { theme, setTheme } = useTheme()
+  const { theme: currentTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   const [appearance, setAppearance] = useState({
     language: "en",
+    theme: "dark" as "light" | "dark" | "system",
+    sidebarCollapsed: false,
     timezone: "pst",
     dateFormat: "mdy",
   })
 
-  // Sync with user preferences and mark mounted (avoids hydration mismatch)
   useEffect(() => {
     setMounted(true)
     if (user?.appearance) {
       setAppearance({
         language: user.appearance.language ?? "en",
+        theme: user.appearance.theme ?? (currentTheme as any) ?? "dark",
+        sidebarCollapsed: !!user.appearance.sidebarCollapsed,
         timezone: user.appearance.timezone ?? "pst",
         dateFormat: user.appearance.dateFormat ?? "mdy",
       })
     }
-  }, [user])
+  }, [user, currentTheme])
 
   async function handleSave() {
     const result = await dispatch(updateProfile({ appearance }))
     if (updateProfile.fulfilled.match(result)) {
-      toast.success("Appearance preferences saved")
+      toast.success(tt("saveSuccess"))
+      setTheme(appearance.theme)
     } else {
-      toast.error("Failed to save preferences")
+      toast.error(tt("saveError"))
     }
+  }
+
+  function handleThemeChange(newTheme: "light" | "dark" | "system") {
+    setAppearance(prev => ({ ...prev, theme: newTheme }))
+    setTheme(newTheme)
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-semibold text-foreground">Appearance</h3>
+        <h3 className="text-sm font-semibold text-foreground">{t("title")}</h3>
         <p className="text-xs text-muted-foreground mt-1">
-          Customize the look and feel of the application.
+          {t("sub")}
         </p>
       </div>
       <Separator />
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Theme
+          {t("theme")}
         </h4>
         <div className="grid grid-cols-3 gap-3">
           <ThemeOption
-            label="Light"
-            active={mounted && theme === "light"}
-            onClick={() => setTheme("light")}
+            label={t("themeLight")}
+            active={mounted && appearance.theme === "light"}
+            onClick={() => handleThemeChange("light")}
             preview="bg-white border-zinc-200"
           />
           <ThemeOption
-            label="Dark"
-            active={mounted && theme === "dark"}
-            onClick={() => setTheme("dark")}
+            label={t("themeDark")}
+            active={mounted && appearance.theme === "dark"}
+            onClick={() => handleThemeChange("dark")}
             preview="bg-zinc-900 border-zinc-700"
           />
           <ThemeOption
-            label="System"
-            active={mounted && theme === "system"}
-            onClick={() => setTheme("system")}
+            label={t("themeSystem")}
+            active={mounted && appearance.theme === "system"}
+            onClick={() => handleThemeChange("system")}
             preview="bg-gradient-to-r from-white to-zinc-900 border-zinc-400"
           />
         </div>
@@ -410,14 +425,14 @@ function AppearanceTab() {
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Display
+          {t("display")}
         </h4>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="language" className="text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <Globe className="size-3" />
-                Language
+                {t("language")}
               </span>
             </Label>
             <Select value={appearance.language} onValueChange={(v) => setAppearance((p) => ({ ...p, language: v }))}>
@@ -425,54 +440,64 @@ function AppearanceTab() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="es">Spanish</SelectItem>
-                <SelectItem value="fr">French</SelectItem>
-                <SelectItem value="de">German</SelectItem>
-                <SelectItem value="he">Hebrew</SelectItem>
+                <SelectItem value="en">{t("languages.en")}</SelectItem>
+                <SelectItem value="he">{t("languages.he")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="timezone" className="text-xs text-muted-foreground">
-              Timezone
+              {t("timezone")}
             </Label>
             <Select value={appearance.timezone} onValueChange={(v) => setAppearance((p) => ({ ...p, timezone: v }))}>
               <SelectTrigger id="timezone" className="bg-secondary">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="pst">Pacific Time (PST)</SelectItem>
-                <SelectItem value="mst">Mountain Time (MST)</SelectItem>
-                <SelectItem value="cst">Central Time (CST)</SelectItem>
-                <SelectItem value="est">Eastern Time (EST)</SelectItem>
-                <SelectItem value="utc">UTC</SelectItem>
-                <SelectItem value="ist">Israel Standard Time (IST)</SelectItem>
+                <SelectItem value="pst">{t("timezones.pst")}</SelectItem>
+                <SelectItem value="mst">{t("timezones.mst")}</SelectItem>
+                <SelectItem value="cst">{t("timezones.cst")}</SelectItem>
+                <SelectItem value="est">{t("timezones.est")}</SelectItem>
+                <SelectItem value="utc">{t("timezones.utc")}</SelectItem>
+                <SelectItem value="ist">{t("timezones.ist")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="dateFormat" className="text-xs text-muted-foreground">
-            Date Format
+            {t("dateFormat")}
           </Label>
           <Select value={appearance.dateFormat} onValueChange={(v) => setAppearance((p) => ({ ...p, dateFormat: v }))}>
             <SelectTrigger id="dateFormat" className="bg-secondary">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="mdy">MM/DD/YYYY</SelectItem>
-              <SelectItem value="dmy">DD/MM/YYYY</SelectItem>
-              <SelectItem value="ymd">YYYY-MM-DD</SelectItem>
+              <SelectItem value="mdy">{t("dateFormats.mdy")}</SelectItem>
+              <SelectItem value="dmy">{t("dateFormats.dmy")}</SelectItem>
+              <SelectItem value="ymd">{t("dateFormats.ymd")}</SelectItem>
             </SelectContent>
           </Select>
+        </div>
+
+        <Separator className="my-4" />
+
+        <div className="flex items-center justify-between rounded-lg border border-border bg-card p-3">
+          <div className="space-y-0.5">
+            <span className="text-sm font-medium text-foreground">{t("sidebarCollapse")}</span>
+            <p className="text-xs text-muted-foreground">{t("sidebarCollapseSub")}</p>
+          </div>
+          <Switch 
+            checked={appearance.sidebarCollapsed} 
+            onCheckedChange={(checked) => setAppearance(p => ({ ...p, sidebarCollapsed: checked }))} 
+          />
         </div>
       </div>
 
       <div className="flex justify-end">
         <Button size="sm" className="gap-1.5" onClick={handleSave}>
           <Save className="size-3.5" />
-          Save Preferences
+          {common("save")}
         </Button>
       </div>
     </div>
@@ -513,6 +538,9 @@ function ThemeOption({
 }
 
 function AccountTab() {
+  const t = useTranslations("Settings.account")
+  const tt = useTranslations("Toasts")
+  const common = useTranslations("Common")
   const dispatch = useAppDispatch()
   const [pwForm, setPwForm] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" })
 
@@ -522,58 +550,58 @@ function AccountTab() {
 
   async function handlePasswordUpdate() {
     if (pwForm.newPassword !== pwForm.confirmPassword) {
-      toast.error("New passwords do not match")
+      toast.error(t("passwordMismatch"))
       return
     }
     const result = await dispatch(
       updateProfile({ currentPassword: pwForm.currentPassword, newPassword: pwForm.newPassword })
     )
     if (updateProfile.fulfilled.match(result)) {
-      toast.success("Password updated")
+      toast.success(t("passwordSuccess"))
       setPwForm({ currentPassword: "", newPassword: "", confirmPassword: "" })
     } else {
-      toast.error((result.payload as string) || "Failed to update password")
+      toast.error((result.payload as string) || tt("updateError"))
     }
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-semibold text-foreground">Account & Security</h3>
+        <h3 className="text-sm font-semibold text-foreground">{t("title")}</h3>
         <p className="text-xs text-muted-foreground mt-1">
-          Manage your account security and preferences.
+          {t("sub")}
         </p>
       </div>
       <Separator />
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Password
+          {t("password")}
         </h4>
         <div className="space-y-3">
           <div className="space-y-2">
             <Label htmlFor="currentPassword" className="text-xs text-muted-foreground">
-              Current Password
+              {t("currentPassword")}
             </Label>
             <Input id="currentPassword" name="currentPassword" type="password" value={pwForm.currentPassword} onChange={handlePwChange} className="bg-secondary" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="newPassword" className="text-xs text-muted-foreground">
-                New Password
+                {t("newPassword")}
               </Label>
               <Input id="newPassword" name="newPassword" type="password" value={pwForm.newPassword} onChange={handlePwChange} className="bg-secondary" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="confirmPassword" className="text-xs text-muted-foreground">
-                Confirm New Password
+                {t("confirmPassword")}
               </Label>
               <Input id="confirmPassword" name="confirmPassword" type="password" value={pwForm.confirmPassword} onChange={handlePwChange} className="bg-secondary" />
             </div>
           </div>
           <div className="flex justify-end">
             <Button variant="outline" size="sm" onClick={handlePasswordUpdate}>
-              Update Password
+              {t("updatePassword")}
             </Button>
           </div>
         </div>
@@ -583,17 +611,17 @@ function AccountTab() {
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Sessions
+          {t("sessions")}
         </h4>
         <div className="space-y-2">
           <div className="flex items-center justify-between rounded-lg border border-border bg-card p-3">
             <div className="space-y-0.5">
-              <span className="text-sm font-medium text-foreground">Current Session</span>
+              <span className="text-sm font-medium text-foreground">{t("currentSession")}</span>
               <p className="text-xs text-muted-foreground">
-                Active session
+                {t("active")}
               </p>
             </div>
-            <span className="text-xs font-medium text-primary">Active</span>
+            <span className="text-xs font-medium text-primary">{t("active")}</span>
           </div>
         </div>
       </div>
@@ -602,18 +630,18 @@ function AccountTab() {
 
       <div className="space-y-4">
         <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          Danger Zone
+          {t("dangerZone")}
         </h4>
         <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-0.5">
-              <span className="text-sm font-medium text-foreground">Delete Account</span>
+              <span className="text-sm font-medium text-foreground">{t("deleteAccount")}</span>
               <p className="text-xs text-muted-foreground">
-                Permanently delete your account and all associated data.
+                {t("deleteAccountSub")}
               </p>
             </div>
             <Button variant="destructive" size="sm">
-              Delete Account
+              {t("deleteAccount")}
             </Button>
           </div>
         </div>
@@ -623,27 +651,28 @@ function AccountTab() {
 }
 
 export function SettingsContent() {
+  const t = useTranslations("Settings")
   return (
     <>
-      <CrmHeader title="Settings" description="Manage your account settings and preferences" />
+      <CrmHeader title={t("title")} description={t("description")} />
       <div className="flex-1 overflow-auto p-4 lg:p-6">
         <Tabs defaultValue="profile" className="space-y-6">
           <TabsList className="bg-secondary">
             <TabsTrigger value="profile" className="gap-1.5 text-xs">
               <User className="size-3.5" />
-              <span className="hidden sm:inline">Profile</span>
+              <span className="hidden sm:inline">{t("tabs.profile")}</span>
             </TabsTrigger>
             <TabsTrigger value="notifications" className="gap-1.5 text-xs">
               <Bell className="size-3.5" />
-              <span className="hidden sm:inline">Notifications</span>
+              <span className="hidden sm:inline">{t("tabs.notifications")}</span>
             </TabsTrigger>
             <TabsTrigger value="appearance" className="gap-1.5 text-xs">
               <Palette className="size-3.5" />
-              <span className="hidden sm:inline">Appearance</span>
+              <span className="hidden sm:inline">{t("tabs.appearance")}</span>
             </TabsTrigger>
             <TabsTrigger value="account" className="gap-1.5 text-xs">
               <Shield className="size-3.5" />
-              <span className="hidden sm:inline">Account</span>
+              <span className="hidden sm:inline">{t("tabs.account")}</span>
             </TabsTrigger>
           </TabsList>
 

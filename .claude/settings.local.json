@@ -13,7 +13,13 @@
       "Bash(powershell -NoProfile -Command \"\n# Write the Python writer script\n$script = @''\nimport base64, os\n\n# deals-content.tsx  \\(base64-encoded to avoid any escaping issues\\)\ndeals_b64 = \\(\n    ''InVzZSBjbGllbnQiCgppbXBvcnQgeyBzdGF0ZUNoYW5nZSwgdXNlRWZmZWN0IH0gZnJvbSAi''\n\\)\n\n# We will write content directly using raw strings\ndeals_path = r''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\components\\\\deals\\\\deals-content.tsx''\nprint\\(''Script running OK''\\)\n''@\n$script | Out-File -FilePath ''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\_writer.py'' -Encoding UTF8\npython C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\_writer.py\n\")",
       "Bash(echo:*)",
       "Bash(ls -la \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\components\\\\contacts\"\" 2>/dev/null || echo \"Directory not found \")",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(node -e:*)",
+      "Bash(curl:*)",
+      "Bash(xargs:*)",
+      "Bash(npm run dev:*)",
+      "Bash(if not exist \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\uploads\" mkdir \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\uploads\")",
+      "mcp__Claude_Preview__preview_start"
     ]
   },
   "hooks": {

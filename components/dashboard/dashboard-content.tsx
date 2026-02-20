@@ -8,11 +8,16 @@ import { RevenueChart } from "@/components/dashboard/revenue-chart"
 import { PipelineChart } from "@/components/dashboard/pipeline-chart"
 import { ActivityFeed } from "@/components/dashboard/activity-feed"
 import { RecentDeals } from "@/components/dashboard/recent-deals"
+import { RiskDistributionChart } from "@/components/dashboard/risk-distribution-chart"
+import { StageFunnelChart } from "@/components/dashboard/stage-funnel-chart"
+import { PortfolioHealthCard } from "@/components/dashboard/portfolio-health-card"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { fetchContacts } from "@/lib/features/contacts/contactsSlice"
 import { fetchDeals } from "@/lib/features/deals/dealsSlice"
+import { useTranslations } from "next-intl"
 
 export function DashboardContent() {
+  const t = useTranslations("Dashboard")
   const dispatch = useAppDispatch()
   const contactsStatus = useAppSelector((state) => state.contacts.status)
   const dealsStatus = useAppSelector((state) => state.deals.status)
@@ -41,7 +46,7 @@ export function DashboardContent() {
 
   return (
     <>
-      <CrmHeader title="Dashboard" description="Overview of your sales pipeline" />
+      <CrmHeader title={t("title")} description={t("description")} />
       <div className="flex-1 overflow-auto p-4 lg:p-6">
         <div className="flex flex-col gap-6">
           <StatCards />
@@ -52,6 +57,11 @@ export function DashboardContent() {
           <div className="grid gap-6 lg:grid-cols-2">
             <RecentDeals />
             <ActivityFeed />
+          </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            <RiskDistributionChart />
+            <StageFunnelChart />
+            <PortfolioHealthCard />
           </div>
         </div>
       </div>

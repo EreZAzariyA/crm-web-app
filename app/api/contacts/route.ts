@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { connectDB } from '@/lib/db/mongodb'
 import Contact from '@/lib/models/Contact'
+import User from '@/lib/models/User'
+import { getScopeFilter } from '@/lib/utils/api-utils'
 
 const createContactSchema = z.object({
   name: z.string().min(1),
@@ -15,6 +17,7 @@ const createContactSchema = z.object({
 export async function GET(req: NextRequest) {
   try {
     const userId = req.headers.get('x-user-id')
+    const systemRole = req.headers.get('x-user-system-role')
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const { searchParams } = new URL(req.url)
@@ -23,7 +26,8 @@ export async function GET(req: NextRequest) {
 
     await connectDB()
 
-    const query: Record<string, unknown> = { userId }
+    const scopeFilter = await getScopeFilter(userId, systemRole)
+    const query: Record<string, unknown> = { ...scopeFilter }
     if (status) query.status = status
     if (search) {
       query.$or = [
@@ -68,8 +72,11 @@ export async function POST(req: NextRequest) {
 
     await connectDB()
 
-    // Duplicate email check
-    const existing = await Contact.findOne({ userId, email: email.toLowerCase() })
+    const user = await User.findById(userId).select('teamId').lean()
+    const teamId = user?.teamId ?? null
+    
+    // Duplicate email check (global)
+    const existing = await Contact.findOne({ email: email.toLowerCase() })
     if (existing) {
       return NextResponse.json(
         { error: 'A contact with this email already exists' },
@@ -81,6 +88,7 @@ export async function POST(req: NextRequest) {
 
     const contact = await Contact.create({
       userId,
+      teamId,
       name,
       email: email.toLowerCase(),
       company,

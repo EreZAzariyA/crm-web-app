@@ -1,0 +1,775 @@
+{
+  "Sidebar": {
+    "navigation": "ניווט",
+    "system": "מערכת",
+    "dashboard": "לוח בקרה",
+    "contacts": "אנשי קשר",
+    "loans": "הלוואות",
+    "activity": "פעילות",
+    "underwriting": "חיתום",
+    "analytics": "אנליטיקה",
+    "admin": "ניהול",
+    "settings": "הגדרות",
+    "profile": "פרופיל",
+    "signout": "התנתק"
+  },
+  "Branding": {
+    "name": "Relay",
+    "description": "פלטפורמת CRM"
+  },
+  "Header": {
+    "search": "חיפוש...",
+    "notifications": "התראות",
+    "markAllRead": "סמן הכל כנקרא",
+    "viewAll": "הצג את כל ההתראות",
+    "unread": "{count} שלא נקראו",
+    "language": "שפה",
+    "mock": {
+      "newContact": "נוסף איש קשר חדש",
+      "newContactBody": "{name} נוסף/ה לאנשי הקשר שלך.",
+      "dealStage": "שלב בעסקה עודכן",
+      "dealStageBody": "העסקה של {company} עברה לשלב {stage}.",
+      "activity": "תזכורת לפעילות",
+      "activityBody": "שיחת המשך עם {company} מתוכננת להיום.",
+      "time2m": "לפני 2 דק'",
+      "time1h": "לפני שעה",
+      "time3h": "לפני 3 שעות"
+    }
+  },
+  "Dashboard": {
+    "title": "לוח בקרה",
+    "description": "סקירה כללית של צינור המכירות שלך",
+    "stats": {
+      "repaidCapital": "הון שנפרע",
+      "repaidLoans": "{count} הלוואה שנפרעה",
+      "repaidLoansPlural": "{count} הלוואות שנפרעו",
+      "activeContacts": "אנשי קשר פעילים",
+      "newLeads": "{count} לידים חדשים",
+      "activeLoans": "הלוואות פעילות",
+      "totalInPortfolio": "{count} סה\"כ בתיק",
+      "approvalRate": "שיעור אישור",
+      "wonClosed": "{won} זכו / {closed} נסגרו"
+    },
+    "charts": {
+      "revenue": "סקירת הכנסות",
+      "revenueSub": "הלוואות שנפרעו לפי חודש",
+      "pipeline": "שווי תיק",
+      "pipelineSub": "לפי שלב",
+      "recentDeals": "הלוואות אחרונות",
+      "activityFeed": "פיד פעילות",
+      "riskDistribution": "התפלגות סיכונים",
+      "riskDistributionSub": "{count} הלוואות מדורגות",
+      "stageFunnel": "משפך צנרת",
+      "stageFunnelSub": "שלבים פעילים",
+      "portfolioHealth": "בריאות התיק",
+      "viewAll": "הצג הכל",
+      "noRecent": "אין פעילות אחרונה",
+      "noScoredLoans": "אין עדיין הלוואות מדורגות",
+      "riskDataHint": "הוסף דירוג אשראי, LTV או DTI כדי להפיק דירוגים",
+      "count": "כמות",
+      "amount": "סכום",
+      "loans": "{count} הלוואות",
+      "loan": "{count} הלוואה"
+    },
+    "metrics": {
+      "defaultRate": "שיעור כשל",
+      "collectionRate": "שיעור גבייה",
+      "avgCreditScore": "דירוג אשראי ממוצע",
+      "wtdAvgRate": "ריבית ממוצעת משוקללת"
+    }
+  },
+  "Stages": {
+    "lead": "ליד",
+    "pre_qualification": "סינון ראשוני",
+    "underwriting": "חיתום",
+    "approved": "אושר",
+    "active": "פעיל",
+    "monitoring": "מעקב",
+    "collection": "גבייה",
+    "closed_won": "סגור - נפרע",
+    "closed_lost": "סגור - נדחה",
+    "default": "כשל"
+  },
+  "Risk": {
+    "A": "סיכון נמוך",
+    "B": "בינוני",
+    "C": "מוגבר",
+    "D": "סיכון גבוה"
+  },
+  "Activity": {
+    "title": "פעילות",
+    "description": "אינטראקציות ועדכונים אחרונים",
+    "tabs": {
+      "timeline": "ציר זמן",
+      "calendar": "לוח שנה"
+    },
+    "filters": {
+      "all": "כל הסוגים",
+      "call": "שיחה",
+      "email": "אימייל",
+      "meeting": "פגישה",
+      "note": "הערה"
+    },
+    "actions": {
+      "log": "תיעוד פעילות",
+      "exportImport": "ייצוא / ייבוא",
+      "export": "ייצוא CSV",
+      "import": "ייבוא CSV"
+    },
+    "empty": {
+      "title": "אין עדיין פעילויות",
+      "sub": "תעד שיחה, אימייל, פגישה או הערה כדי להתחיל"
+    },
+    "dialogs": {
+      "logTitle": "תיעוד פעילות",
+      "logSub": "תעד שיחה, אימייל, פגישה או הערה.",
+      "type": "סוג",
+      "contact": "איש קשר",
+      "activityTitle": "כותרת *",
+      "notes": "הערות",
+      "deleteTitle": "למחוק את הפעילות?",
+      "deleteConfirm": "\"{title}\" יוסר לצמיתות."
+    },
+    "import": {
+      "title": "ייבוא פעילויות מ-CSV",
+      "description": "העלה קובץ CSV עם כותרות כמו סוג, כותרת, איש קשר ותיאור.",
+      "mappingHint": "סוגים תקפים: שיחה (Call), אימייל (Email), פגישה (Meeting), הערה (Note).",
+      "success": "יובאו בהצלחה {count} פעילויות"
+    },
+    "calendar": {
+      "noActivities": "אין פעילויות ליום זה",
+      "selectDate": "בחר תאריך"
+    },
+    "placeholders": {
+      "contact": "ישראל ישראלי",
+      "title": "שיחת היכרות עם אקמי בע\"מ",
+      "notes": "מה נדון בשיחה...",
+      "dropzone": "לחץ להעלאה או גרור ושחרר",
+      "hint": "קבצי CSV בלבד (עד 5MB)"
+    }
+  },
+  "Settings": {
+    "title": "הגדרות",
+    "description": "נהל את הגדרות החשבון וההעדפות שלך",
+    "tabs": {
+      "profile": "פרופיל",
+      "notifications": "התראות",
+      "appearance": "מראה",
+      "account": "חשבון"
+    },
+    "appearance": {
+      "title": "מראה",
+      "sub": "התאם אישית את המראה והתחושה של האפליקציה.",
+      "theme": "ערכת נושא",
+      "themeLight": "בהיר",
+      "themeDark": "כהה",
+      "themeSystem": "מערכת",
+      "display": "תצוגה",
+      "language": "שפה",
+      "timezone": "אזור זמן",
+      "dateFormat": "פורמט תאריך",
+      "sidebarCollapse": "צמצם סרגל צד כברירת מחדל",
+      "sidebarCollapseSub": "שמור על תפריט הניווט מצומצם",
+      "languages": {
+        "en": "אנגלית",
+        "he": "עברית"
+      },
+      "timezones": {
+        "pst": "זמן פסיפי (PST)",
+        "mst": "זמן הרים (MST)",
+        "cst": "זמן מרכז (CST)",
+        "est": "זמן מזרח (EST)",
+        "utc": "UTC",
+        "ist": "זמן ישראל (IST)"
+      },
+      "dateFormats": {
+        "mdy": "MM/DD/YYYY",
+        "dmy": "DD/MM/YYYY",
+        "ymd": "YYYY-MM-DD"
+      }
+    },
+    "profile": {
+      "title": "פרטי פרופיל",
+      "sub": "עדכן את הפרטים האישיים ופרטי הקשר שלך.",
+      "firstName": "שם פרטי",
+      "lastName": "שם משפחה",
+      "email": "כתובת אימייל",
+      "phone": "מספר טלפון",
+      "company": "חברה",
+      "role": "תפקיד",
+      "location": "מיקום",
+      "bio": "ביוגרפיה",
+      "bioPlaceholder": "ספר לנו על עצמך...",
+      "changeAvatar": "שנה תמונת פרופיל",
+      "avatarHint": "JPG, PNG או GIF. מקסימום 2MB.",
+      "saveSuccess": "הפרופיל נשמר",
+      "saveError": "שמירת הפרופיל נכשלה"
+    },
+    "notifications": {
+      "title": "העדפות התראות",
+      "sub": "בחר כיצד ומתי ברצונך לקבל התראות.",
+      "channels": "ערוצים",
+      "email": "התראות אימייל",
+      "emailSub": "קבל התראות באמצעות האימייל",
+      "push": "התראות פוש",
+      "pushSub": "קבל התראות פוש בדפדפן",
+      "activity": "פעילות",
+      "dealUpdates": "עדכוני עסקאות",
+      "dealUpdatesSub": "כאשר סטטוס או שלב בעסקה משתנה",
+      "contactUpdates": "עדכוני אנשי קשר",
+      "contactUpdatesSub": "כאשר איש קשר נוסף או מעודכן",
+      "activityAlerts": "התראות פעילות",
+      "activityAlertsSub": "כאשר מתועדת פעילות חדשה בעסקאות שלך",
+      "reports": "דוחות",
+      "weekly": "סיכום שבועי",
+      "weeklySub": "קבל אימייל שבועי עם סיכום ה-CRM שלך",
+      "saveSuccess": "העדפות ההתראות נשמרו",
+      "saveError": "שמירת ההעדפות נכשלה",
+      "saveButton": "שמור העדפות"
+    },
+    "account": {
+      "title": "חשבון ואבטחה",
+      "sub": "נהל את אבטחת החשבון והעדפותיך.",
+      "password": "סיסמה",
+      "currentPassword": "סיסמה נוכחית",
+      "newPassword": "סיסמה חדשה",
+      "confirmPassword": "אישור סיסמה חדשה",
+      "updatePassword": "עדכן סיסמה",
+      "passwordSuccess": "הסיסמה עודכנה",
+      "passwordMismatch": "הסיסמאות החדשות אינן תואמות",
+      "sessions": "חיבורים פעילים",
+      "currentSession": "חיבור נוכחי",
+      "active": "פעיל",
+      "dangerZone": "אזור מסוכן",
+      "deleteAccount": "מחק חשבון",
+      "deleteAccountSub": "מחק לצמיתות את חשבונך וכל הנתונים הקשורים."
+    }
+  },
+  "Common": {
+    "save": "שמור שינויים",
+    "cancel": "ביטול",
+    "delete": "מחיקה",
+    "loading": "טוען...",
+    "search": "חיפוש...",
+    "done": "בוצע",
+    "copy": "העתק",
+    "copied": "הועתק!",
+    "previous": "הקודם",
+    "next": "הבא",
+    "more": "עוד"
+  },
+  "Search": {
+    "title": "חיפוש גלובלי",
+    "description": "חפש באנשי קשר, הלוואות ופעילויות",
+    "placeholder": "חפש אנשי קשר, הלוואות, פעילויות...",
+    "noResults": "אין תוצאות עבור \"{query}\"",
+    "trySearching": "נסה לחפש לפי שם, אימייל או חברה",
+    "navigation": "ניווט",
+    "goTo": "עבור אל {label}",
+    "shortcuts": "↑↓ ניווט · ↵ בחירה · esc סגירה"
+  },
+  "Contacts": {
+    "title": "אנשי קשר",
+    "description": "נהל את אנשי הקשר והלידים שלך",
+    "searchPlaceholder": "חפש אנשי קשר...",
+    "addContact": "הוסף איש קשר",
+    "status": {
+      "lead": "ליד",
+      "prospect": "פוטנציאלי",
+      "customer": "לקוח",
+      "churned": "נטש",
+      "all": "כל הסטטוסים"
+    },
+    "table": {
+      "name": "שם",
+      "company": "חברה",
+      "role": "תפקיד",
+      "status": "סטטוס",
+      "lastActivity": "פעילות אחרונה",
+      "email": "אימייל",
+      "empty": "לא נמצאו אנשי קשר",
+      "showing": "מציג {count} מתוך {total} אנשי קשר"
+    },
+    "import": {
+      "title": "ייבוא אנשי קשר מ-CSV",
+      "description": "העלה קובץ CSV עם כותרות כמו שם, אימייל, חברה, תפקיד, טלפון וסטטוס.",
+      "dropzone": "לחץ להעלאה או גרור ושחרר",
+      "hint": "קבצי CSV בלבד (עד 5MB)",
+      "preview": "תצוגה מקדימה (5 שורות ראשונות)",
+      "mappingHint": "וודא שעמודות ה-CSV שלך תואמות לשמות הצפויים (למשל, \"שם מלא\" ← \"שם\").",
+      "success": "{count} אנשי קשר יובאו בהצלחה",
+      "error": "ייבוא {count} שורות נכשל. בדוק את הפורמט.",
+      "button": "ייבוא {target}"
+    },
+    "dialogs": {
+      "addTitle": "הוסף איש קשר",
+      "addDescription": "מלא את הפרטים כדי להוסיף איש קשר חדש.",
+      "editTitle": "עריכת איש קשר",
+      "editDescription": "עדכן את פרטי איש הקשר למטה.",
+      "deleteTitle": "למחוק את {name}?",
+      "deleteDescription": "פעולה זו אינה ניתנת לביטול. איש הקשר וכל הנתונים הקשורים יוסרו לצמיתות.",
+      "addToDealTitle": "הוסף לעסקה",
+      "addToDealDescription": "קשר את {name} לעסקה קיימת.",
+      "selectDeal": "בחר עסקה",
+      "chooseDeal": "בחר עסקה...",
+      "noDeals": "אין עסקאות זמינות.",
+      "linkButton": "קשר לעסקה"
+    },
+    "actions": {
+      "export": "ייצוא CSV",
+      "import": "ייבוא CSV",
+      "viewDetails": "צפה בפרטים",
+      "editContact": "ערוך איש קשר",
+      "addToDeal": "הוסף לעסקה",
+      "delete": "מחק"
+    },
+    "form": {
+      "fullName": "שם מלא *",
+      "email": "אימייל *",
+      "company": "חברה",
+      "role": "תפקיד",
+      "phone": "טלפון",
+      "status": "סטטוס",
+      "placeholders": {
+        "name": "ישראל ישראלי",
+        "email": "israel@company.com",
+        "company": "אקמי בע\"מ",
+        "role": "סמנכ\"ל מכירות",
+        "phone": "050-000-0000"
+      }
+    },
+    "notFound": "איש קשר לא נמצא",
+    "notFoundSub": "איש קשר זה אינו קיים או שנמחק.",
+    "backToList": "חזרה לאנשי קשר",
+    "allContacts": "כל אנשי הקשר",
+    "email": "אימייל",
+    "call": "שיחה",
+    "edit": "ערוך",
+    "delete": "מחק",
+    "info": "פרטי קשר",
+    "role": "תפקיד",
+    "lastActivity": "פעילות אחרונה",
+    "summary": "סיכום",
+    "deals": "עסקאות",
+    "activities": "פעילויות",
+    "totalPipeline": "סה\"כ צנרת",
+    "noDeals": "אין עדיין עסקאות המקושרות לאיש קשר זה",
+    "noActivities": "לא תועדו פעילויות עבור איש קשר זה",
+    "closes": "נסגר ב-{date}",
+    "probability": "{count}% סבירות"
+  },
+  "Underwriting": {
+    "title": "חיתום",
+    "description": "סקור והחלט לגבי הלוואות הממתינות לחיתום",
+    "pendingReview": "ממתין לסקירה · {count}",
+    "noLoans": "אין הלוואות בחיתום",
+    "noLoansSub": "העבר הלוואה לשלב החיתום כדי להתחיל בסקירה.",
+    "selectToReview": "בחר הלוואה לסקירה",
+    "history": "היסטוריית שלבים",
+    "noHistory": "טרם נרשמה היסטוריית שלבים.",
+    "decision": "החלטה",
+    "reasonPlaceholder": "סיבת ההחלטה (חובה עבור דחייה)...",
+    "approve": "אשר",
+    "decline": "דחה",
+    "decisionHint": "חובה לציין סיבה לדחייה. הלוואות מאושרות עוברות לשלב 'אושר'.",
+    "scorecardTitle": "כרטיס ניקוד ללווה",
+    "checklistTitle": "צ'ק ליסט חיתום",
+    "checklistStatus": "{count}/{total} הושלמו",
+    "insufficientData": "אין מספיק נתונים",
+    "checklistItems": {
+      "creditReport": "דוח אשראי נבדק",
+      "incomeVerification": "אימות הכנסה הושלם",
+      "collateralAssessed": "נכס/בטחונות הוערכו",
+      "legalDocuments": "מסמכים משפטיים נבדקו",
+      "bankStatements": "דפי בנק אומתו",
+      "identityVerification": "אימות זהות הושלם",
+      "propertyTitle": "בדיקת נסח טאבו (במידת הצורך)"
+    }
+  },
+  "Metrics": {
+    "creditScore": "דירוג אשראי",
+    "ltv": "יחס LTV",
+    "dti": "יחס DTI",
+    "loanAmount": "סכום הלוואה",
+    "loanTerm": "תקופת הלוואה",
+    "interestRate": "שיעור ריבית",
+    "collateral": "ביטחונות",
+    "approvedAmt": "סכום מאושר",
+    "riskScore": "ציון סיכון",
+    "months": "{count} חודשים"
+  },
+  "Analytics": {
+    "title": "אנליטיקה",
+    "description": "ביצועי תיק וניתוח סיכונים",
+    "tabs": {
+      "overview": "סקירה כללית",
+      "risk": "ניתוח סיכונים",
+      "pipeline": "צנרת",
+      "repayments": "החזרים"
+    },
+    "risk": {
+      "title": "ציוני סיכון הלוואות",
+      "loansCount": "{count} הלוואות",
+      "table": {
+        "loan": "הלוואה",
+        "stage": "שלב",
+        "creditScore": "דירוג אשראי",
+        "ltv": "LTV",
+        "dti": "DTI",
+        "score": "ציון",
+        "rating": "דירוג"
+      }
+    },
+    "pipeline": {
+      "conversionTitle": "שיעורי המרה בין שלבים",
+      "table": {
+        "stage": "שלב",
+        "loans": "הלוואות",
+        "conversion": "המרה משלב קודם"
+      }
+    },
+    "repayments": {
+      "title": "החזרים צפויים לפי חודש",
+      "sub": "מבוסס על סבירות × סכום ההלוואה",
+      "noDates": "לא הוגדרו תאריכי פירעון צפויים.",
+      "table": {
+        "month": "חודש",
+        "loans": "הלוואות",
+        "expected": "החזרים צפויים",
+        "total": "סה\"כ"
+      }
+    }
+  },
+  "Admin": {
+    "title": "ניהול",
+    "description": "נהל משתמשים, צוותים, תפקידים והגדרות סביבת עבודה",
+    "tabs": {
+      "overview": "סקירה כללית",
+      "users": "משתמשים",
+      "teams": "צוותים",
+      "pipeline": "צנרת"
+    },
+    "overview": {
+      "crm": "סקירת CRM",
+      "workspace": "סביבת עבודה",
+      "recentMembers": "חברים חדשים",
+      "totalContacts": "סה\"כ אנשי קשר",
+      "totalLoans": "סה\"כ הלוואות",
+      "portfolioValue": "שווי תיק",
+      "totalActivities": "סה\"כ פעילויות",
+      "totalUsers": "סה\"כ משתמשים",
+      "admins": "מנהלי מערכת",
+      "teams": "צוותים",
+      "inactive": "לא פעילים",
+      "active": "פעיל",
+      "fullAccess": "גישה מלאה",
+      "deactivated": "מבוטל",
+      "repaid": "נפרעו",
+      "logged": "תועדו",
+      "membersSub": "חברים"
+    },
+    "users": {
+      "searchPlaceholder": "חפש משתמשים...",
+      "refresh": "רענן",
+      "invite": "הזמן משתמש",
+      "inviteDescription": "צור קישור הזמנה לשיתוף עם המשתמש החדש. הקישור יפוג בעוד 7 ימים.",
+      "inviteGenerated": "קישור הזמנה נוצר!",
+      "inviteShareHint": "שתף קישור זה עם {name} ({email}). הקישור יפוג בעוד 7 ימים.",
+      "generateInvite": "צור קישור הזמנה",
+      "form": {
+        "firstName": "שם פרטי *",
+        "lastName": "שם משפחה",
+        "email": "אימייל *",
+        "role": "תפקיד מערכת",
+        "team": "צוות (אופציונלי)",
+        "noTeam": "ללא צוות"
+      },
+      "table": {
+        "name": "שם",
+        "email": "אימייל",
+        "team": "צוות",
+        "role": "תפקיד מערכת",
+        "status": "סטטוס",
+        "joined": "הצטרף ב-{date}",
+        "you": "אתה",
+        "cantModifySelf": "אינך יכול לשנות את החשבון של עצמך",
+        "changeRole": "שנה תפקיד",
+        "assignTeam": "שייך לצוות"
+      },
+      "dialogs": {
+        "assignTeamTitle": "שיוך את {name} לצוות",
+        "assignTeamDescription": "בחר צוות עבור משתמש זה. הוא ישתף נתונים עם חברי צוות אחרים.",
+        "selectTeam": "בחר צוות",
+        "noTeam": "ללא צוות (הסר מצוות)"
+      },
+      "noResults": "לא נמצאו משתמשים התואמים לחיפוש",
+      "noUsers": "לא נמצאו משתמשים",
+      "showing": "מציג {count} מתוך {total} משתמשים",
+      "pendingInvites": "הזמנות ממתינות ({count})",
+      "unnamed": "(ללא שם)",
+      "expires": "פג תוקף ב-{date}",
+      "revoke": "בטל"
+    },
+    "pipeline": {
+      "conversionTitle": "שיעורי המרה בין שלבים",
+      "conversionSub": "תצורת השלבים הנוכחית והתפלגות העסקאות",
+      "table": {
+        "loansCount": "{count} {count, plural, one {הלוואה} other {הלוואות}}",
+        "value": "שווי",
+        "weighted": "משוקלל",
+        "pctOfTotal": "{count}% מסך ההלוואות",
+        "totalLoansAcross": "{count} הלוואות סה\"כ בכל השלבים",
+        "totalPipeline": "סה\"כ צנרת"
+      }
+    },
+    "roles": {
+      "admin": "מנהל מערכת",
+      "manager": "מנהל",
+      "user": "משתמש",
+      "makeAdmin": "הפוך למנהל מערכת",
+      "makeManager": "הפוך למנהל",
+      "makeUser": "הפוך למשתמש",
+      "activate": "הפעל",
+      "deactivate": "בטל פעילות"
+    },
+    "teams": {
+      "count": "{count} צוותים",
+      "create": "צור צוות",
+      "noTeams": "אין עדיין צוותים",
+      "noTeamsSub": "צור צוות כדי לשתף נתוני CRM בין משתמשים",
+      "members": "{count} חברים",
+      "lead": "ראש צוות: {name}",
+      "noMembers": "אין עדיין חברים",
+      "addMember": "הוסף חבר",
+      "deleteTitle": "למחוק את \"{name}\"?",
+      "deleteSub": "פעולה זו תסיר את הצוות ותבטל את השיוך של {count} חברים. הנתונים שלהם יישארו אך הם לא ישתפו יותר נתוני CRM.",
+      "dialogs": {
+        "createTitle": "צור צוות",
+        "createSub": "צור צוות כדי לשתף נתוני CRM בין חברים.",
+        "name": "שם הצוות *",
+        "desc": "תיאור",
+        "nameRequired": "שם צוות הוא חובה",
+        "userRequired": "בחר משתמש",
+        "namePlaceholder": "צוות מכירות",
+        "editTitle": "ערוך צוות",
+        "addMemberTitle": "הוסף חבר ל-\"{name}\"",
+        "addMemberSub": "בחר משתמש להוספה לצוות זה. הוא ישתף נתוני צוות באופן מיידי.",
+        "userLabel": "משתמש *",
+        "roleLabel": "תפקיד בצוות",
+        "member": "חבר",
+        "teamLead": "ראש צוות",
+        "allInTeam": "כל המשתמשים הפעילים כבר בצוות זה"
+      }
+    }
+  },
+  "Auth": {
+    "login": {
+      "title": "התחברות ל-Relay",
+      "sub": "הזן את פרטי ההתחברות שלך כדי להמשיך",
+      "email": "אימייל",
+      "password": "סיסמה",
+      "signInEmail": "התחבר עם אימייל",
+      "signingIn": "מתחבר...",
+      "inviteOnly": "הגישה היא לפי הזמנה בלבד. צור קשר עם מנהל המערכת לקבלת גישה.",
+      "error": "משהו השתבש."
+    },
+    "register": {
+      "title": "הגישה היא לפי הזמנה בלבד",
+      "sub": "חשבונות חדשים נוצרים על ידי מנהל סביבת העבודה שלך באמצעות קישור הזמנה. צור קשר עם מנהל המערכת לקבלת גישה.",
+      "backToSignIn": "חזרה להתחברות"
+    },
+    "invite": {
+      "title": "הוזמנת!",
+      "sub": "השלם את הגדרת החשבון שלך עבור Relay CRM",
+      "role": "תפקיד",
+      "setPass": "הגדר סיסמה",
+      "confirmPass": "אישור סיסמה",
+      "createAccount": "צור חשבון",
+      "alreadyHave": "כבר יש לך חשבון?",
+      "signIn": "התחבר",
+      "success": "החשבון נוצר!",
+      "redirecting": "מעביר אותך ללוח הבקרה...",
+      "expired": "תוקף ההזמנה פג",
+      "used": "ההזמנה כבר נוצלה",
+      "invalid": "הזמנה לא חוקית",
+      "passMinLen": "הסיסמה חייבת להכיל לפחות 8 תווים",
+      "passMismatch": "הסיסמאות אינן תואמות",
+      "accountFailed": "יצירת החשבון נכשלה",
+      "validateFailed": "אימות קישור ההזמנה נכשל",
+      "invalidLink": "קישור הזמנה לא חוקי"
+    },
+    "errors": {
+      "oauth_cancelled": "ההתחברות בוטלה.",
+      "oauth_failed": "התחברות OAuth נכשלה. אנא נסה שוב.",
+      "no_email": "לא ניתן היה לשלוף את האימייל שלך מהספק.",
+      "invite_required": "לא נמצא חשבון. אנא השתמש בקישור ההזמנה שלך כדי להירשם.",
+      "account_deactivated": "חשבונך בוטל. צור קשר עם מנהל המערכת."
+    }
+  },
+  "Tiers": {
+    "excellent": "מצוין",
+    "good": "טוב",
+    "fair": "בינוני",
+    "poor": "חלש",
+    "unscored": "ללא דירוג"
+  },
+  "DateFormat": {
+    "short": "{day} ב{month}, {year}"
+  },
+  "Toasts": {
+    "saveSuccess": "השינויים נשמרו בהצלחה",
+    "saveError": "שמירת השינויים נכשלה",
+    "error": "משהו השתבש",
+    "requiredFields": "חסרים שדות חובה",
+    "deleteSuccess": "הפריט נמחק",
+    "deleteError": "מחיקת הפריט נכשלה",
+    "updateSuccess": "עודכן בהצלחה",
+    "updateError": "העדכון נכשל",
+    "importSuccess": "הייבוא הושלם בהצלחה",
+    "importError": "הייבוא נכשל. בדוק את הפורמט.",
+    "linkSuccess": "קשור בהצלחה",
+    "linkError": "הקישור נכשל",
+    "uploadSuccess": "הקובץ הועלה בהצלחה",
+    "uploadError": "העלאת הקובץ נכשלה",
+    "inviteRevoked": "ההזמנה בוטלה",
+    "rescoreSuccess": "דירוג מחדש הושלם בהצלחה"
+  },
+  "Loans": {
+    "title": "הלוואות",
+    "description": "נהל את בקשות ההלוואה וצינור האשראי שלך",
+    "searchPlaceholder": "חפש הלוואות...",
+    "newLoan": "בקשת הלוואה חדשה",
+    "pipeline": "צנרת",
+    "list": "רשימה",
+    "allStages": "כל השלבים",
+    "actions": {
+      "viewDetails": "צפה בפרטים",
+      "editLoan": "ערוך הלוואה",
+      "delete": "מחק",
+      "export": "ייצוא CSV",
+      "import": "ייבוא CSV",
+      "exportImport": "ייצוא / ייבוא"
+    },
+    "stats": {
+      "activePortfolio": "תיק פעיל",
+      "expectedRepayments": "החזרים צפויים",
+      "avgLoanSize": "גודל הלוואה ממוצע",
+      "approvalRate": "שיעור אישור"
+    },
+    "stageDescriptions": {
+      "lead": "פנייה ראשונית או הפניה",
+      "pre_qualification": "הערכת זכאות בסיסית",
+      "underwriting": "בדיקת נאותות מלאה בתהליך",
+      "approved": "תנאי ההלוואה הוסכמו, ממתין לביצוע",
+      "active": "בוצע, בהחזר",
+      "monitoring": "תחת מעקב מוגבר",
+      "collection": "בפיגור, החלו הליכי גבייה",
+      "closed_won": "נפרע במלואו",
+      "closed_lost": "נדחה או נמשך",
+      "default": "בכשל רשמי"
+    },
+    "import": {
+      "title": "ייבוא הלוואות מ-CSV",
+      "description": "העלה קובץ CSV עם כותרות כמו כותרת, חברה, סכום, שלב, איש קשר ותאריך סגירה צפוי.",
+      "mappingHint": "שלבים יותאמו לליד, חיתום, אושר וכו'.",
+      "success": "יובאו בהצלחה {count} הלוואות"
+    },
+    "dialogs": {
+      "addTitle": "בקשת הלוואה חדשה",
+      "addDescription": "מלא את הפרטים כדי להוסיף בקשת הלוואה חדשה לצנרת.",
+      "editTitle": "עריכת בקשת הלוואה",
+      "editDescription": "עדכן את פרטי בקשת ההלוואה למטה.",
+      "moveTitle": "העברת שלב",
+      "moveDescription": "העבר את {name} לשלב הבא. רק מעברים חוקיים מוצגים.",
+      "deleteTitle": "למחוק את \"{name}\"?",
+      "deleteDescription": "פעולה זו אינה ניתנת לביטול.",
+      "reasonLabel": "סיבה (אופציונלי)",
+      "reasonPlaceholder": "מדוע הלוואה זו מוסרת?",
+      "noTransitions": "אין מעברים חוקיים משלב זה.",
+      "selected": "נבחר",
+      "noLoans": "לא נמצאו הלוואות",
+      "dropHere": "שחרר כאן",
+      "noLoansCol": "אין הלוואות",
+      "closedCol": "סגור וכשל ({count} הלוואות)"
+    },
+    "form": {
+      "tabs": {
+        "details": "פרטי הלוואה",
+        "documents": "מסמכים"
+      },
+      "core": {
+        "title": "כותרת הלוואה *",
+        "borrower": "לווה / חברה",
+        "contact": "איש קשר ראשי",
+        "amount": "סכום הלוואה ($) *",
+        "probability": "סבירות החזר (%)",
+        "stage": "שלב מחזור חיים",
+        "disbursement": "ביצוע צפוי",
+        "notes": "הערות"
+      },
+      "lending": {
+        "title": "פרטי אשראי",
+        "rate": "שיעור ריבית (%)",
+        "term": "תקופת הלוואה (חודשים)",
+        "ltv": "יחס LTV (%)",
+        "dti": "יחס DTI (%)",
+        "creditScore": "דירוג אשראי",
+        "riskRating": "דירוג סיכון",
+        "approvedAmount": "סכום מאושר ($)",
+        "origFee": "עמלת הקמה (%)",
+        "disbDate": "תאריך ביצוע",
+        "matDate": "תאריך פירעון",
+        "collateral": "שווי ביטחונות ($)"
+      },
+      "placeholders": {
+        "title": "הלוואת גישור מסחרית - אקמי",
+        "borrower": "אקמי בע\"מ",
+        "contact": "ישראל ישראלי",
+        "notes": "פרטים מרכזיים, מידע על ביטחונות, צעדים הבאים..."
+      }
+    },
+    "documents": {
+      "title": "מסמכים",
+      "dropzone": "לחץ או גרור להעלאה",
+      "hint": "CSV, Excel (.xlsx / .xls), או PDF · מקסימום 10 MB",
+      "uploading": "מעלה...",
+      "noDocs": "טרם הועלו מסמכים.",
+      "saveFirst": "שמור את ההלוואה תחילה כדי להעלות מסמכים.",
+      "applyData": "החל נתונים שחולצו על הטופס",
+      "extracted": {
+        "revenue": "הכנסה חודשית",
+        "dti": "DTI מוצע",
+        "balance": "יתרת חשבון",
+        "maxLoan": "הלוואה מקסימלית (מוערך)"
+      }
+    },
+    "riskAssessment": {
+      "title": "הערכת סיכונים",
+      "rescore": "דירוג מחדש",
+      "rescoreSuccess": "דורג מחדש: דירוג {rating} ({score}/100)",
+      "hint": "הוסף דירוג אשראי, LTV או DTI כדי להפיק ציון סיכון."
+    },
+    "view": {
+      "amount": "סכום הלוואה",
+      "probability": "סבירות החזר",
+      "repayments": "החזרים צפויים",
+      "details": "פרטים",
+      "reason": "סיבה",
+      "schedule": "לוח סילוקין",
+      "amortization": {
+        "title": "לוח סילוקין",
+        "monthlyPayment": "תשלום חודשי",
+        "totalInterest": "סה\"כ ריבית",
+        "totalPaid": "סה\"כ תשלום",
+        "payments": "מספר תשלומים",
+        "month": "חודש",
+        "payment": "תשלום",
+        "principal": "קרן",
+        "interest": "ריבית",
+        "balance": "יתרה",
+        "exportCSV": "ייצוא CSV",
+        "noData": "הגדר שיעור ריבית ותקופת הלוואה כדי ליצור את לוח הסילוקין."
+      }
+    }
+  }
+}

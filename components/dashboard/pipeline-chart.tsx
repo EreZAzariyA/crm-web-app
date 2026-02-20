@@ -12,14 +12,13 @@ import {
 } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useAppSelector } from "@/lib/hooks"
+import { useTranslations } from "next-intl"
 
-const stageMapping: Record<string, string> = {
-  discovery: "Discovery",
-  proposal: "Proposal",
-  negotiation: "Negotiation",
-  "closed-won": "Closed Won",
-  "closed-lost": "Closed Lost",
-}
+// Active (non-terminal) lending stages shown in the portfolio chart
+const ACTIVE_STAGES = [
+  "lead", "pre_qualification", "underwriting", "approved", 
+  "active", "monitoring", "collection"
+]
 
 /** Read a CSS variable from :root as a string, falling back to the provided default. */
 function getCssVar(name: string, fallback: string) {
@@ -28,6 +27,8 @@ function getCssVar(name: string, fallback: string) {
 }
 
 export function PipelineChart() {
+  const t = useTranslations("Dashboard.charts")
+  const tStages = useTranslations("Stages")
   const { items: deals } = useAppSelector((state) => state.deals)
   const [colors, setColors] = useState({
     primary: "#10b981",
@@ -55,39 +56,36 @@ export function PipelineChart() {
   }, [])
 
   const pipelineData = useMemo(() => {
-    const stages = new Map([
-      ["Discovery", { value: 0, count: 0 }],
-      ["Proposal", { value: 0, count: 0 }],
-      ["Negotiation", { value: 0, count: 0 }],
-      ["Closed Won", { value: 0, count: 0 }],
-    ])
+    // Initialise map with all active stages (preserving order)
+    const stagesMap = new Map(
+      ACTIVE_STAGES.map((key) => [key, { value: 0, count: 0 }])
+    )
 
     deals.forEach((deal) => {
-      const label = stageMapping[deal.stage]
-      if (stages.has(label)) {
-        const current = stages.get(label)!
-        stages.set(label, {
+      if (stagesMap.has(deal.stage)) {
+        const current = stagesMap.get(deal.stage)!
+        stagesMap.set(deal.stage, {
           value: current.value + deal.value,
           count: current.count + 1,
         })
       }
     })
 
-    return Array.from(stages.entries()).map(([stage, data]) => ({
-      stage,
+    return Array.from(stagesMap.entries()).map(([key, data]) => ({
+      stage: tStages(key as any),
       value: data.value,
       count: data.count,
     }))
-  }, [deals])
+  }, [deals, tStages])
 
   return (
     <Card className="border-border bg-card">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-medium text-foreground">
-            Pipeline Value
+            {t("pipeline")}
           </CardTitle>
-          <span className="text-xs text-muted-foreground">By stage</span>
+          <span className="text-xs text-muted-foreground">{t("pipelineSub")}</span>
         </div>
       </CardHeader>
       <CardContent className="pt-0">
@@ -103,7 +101,7 @@ export function PipelineChart() {
                 dataKey="stage"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: colors.mutedFg, fontSize: 11 }}
+                tick={{ fill: colors.mutedFg, fontSize: 10 }}
               />
               <YAxis
                 axisLine={false}
@@ -119,13 +117,13 @@ export function PipelineChart() {
                   color: colors.cardFg,
                   fontSize: "12px",
                 }}
-                formatter={(value: number) => [`$${value.toLocaleString()}`, "Value"]}
+                formatter={(value: number) => [`$${value.toLocaleString()}`, t("amount")]}
               />
               <Bar
                 dataKey="value"
                 fill={colors.primary}
                 radius={[4, 4, 0, 0]}
-                barSize={40}
+                barSize={32}
               />
             </BarChart>
           </ResponsiveContainer>

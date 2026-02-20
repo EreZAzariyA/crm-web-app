@@ -11,8 +11,10 @@ import {
   Tooltip,
 } from "recharts"
 import { format, compareAsc } from "date-fns"
+import { he, enUS } from "date-fns/locale"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useAppSelector } from "@/lib/hooks"
+import { useTranslations, useLocale } from "next-intl"
 
 /** Read a CSS variable from :root as a string, falling back to the provided default. */
 function getCssVar(name: string, fallback: string) {
@@ -21,6 +23,9 @@ function getCssVar(name: string, fallback: string) {
 }
 
 export function RevenueChart() {
+  const t = useTranslations("Dashboard.charts")
+  const locale = useLocale()
+  const dateLocale = locale === "he" ? he : enUS
   const { items: deals } = useAppSelector((state) => state.deals)
   const [colors, setColors] = useState({
     primary: "#10b981",
@@ -51,12 +56,12 @@ export function RevenueChart() {
     const monthlyData = new Map<string, { revenue: number; deals: number; date: Date }>()
 
     deals
-      .filter((deal) => deal.stage === "closed-won")
+      .filter((deal) => deal.stage === "closed_won")
       .forEach((deal) => {
         const date = new Date(deal.expectedClose)
         if (isNaN(date.getTime())) return
 
-        const monthKey = format(date, "MMM")
+        const monthKey = format(date, "MMM", { locale: dateLocale })
 
         if (!monthlyData.has(monthKey)) {
           monthlyData.set(monthKey, { revenue: 0, deals: 0, date })
@@ -75,16 +80,16 @@ export function RevenueChart() {
         date: data.date,
       }))
       .sort((a, b) => compareAsc(a.date, b.date))
-  }, [deals])
+  }, [deals, dateLocale])
 
   return (
     <Card className="border-border bg-card">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-medium text-foreground">
-            Revenue Overview
+            {t("revenue")}
           </CardTitle>
-          <span className="text-xs text-muted-foreground">Closed Won Deals</span>
+          <span className="text-xs text-muted-foreground">{t("revenueSub")}</span>
         </div>
       </CardHeader>
       <CardContent className="pt-0">
@@ -122,7 +127,7 @@ export function RevenueChart() {
                   color: colors.cardFg,
                   fontSize: "12px",
                 }}
-                formatter={(value: number) => [`$${value.toLocaleString()}`, "Revenue"]}
+                formatter={(value: number) => [`$${value.toLocaleString()}`, t("amount")]}
               />
               <Area
                 type="monotone"

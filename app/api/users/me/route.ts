@@ -25,6 +25,8 @@ const updateProfileSchema = z.object({
   appearance: z
     .object({
       language: z.string().optional(),
+      theme: z.enum(['light', 'dark', 'system']).optional(),
+      sidebarCollapsed: z.boolean().optional(),
       timezone: z.string().optional(),
       dateFormat: z.string().optional(),
     })

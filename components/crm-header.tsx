@@ -1,35 +1,64 @@
 "use client"
 
-import { Bell, Search, CheckCheck } from "lucide-react"
+import { Bell, Search, CheckCheck, Languages } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
 import { ModeToggle } from "@/components/mode-toggle"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
-const MOCK_NOTIFICATIONS = [
-  { id: 1, title: "New contact added", body: "Sarah Johnson was added to your contacts.", time: "2m ago", read: false },
-  { id: 2, title: "Deal stage updated", body: "Acme Corp deal moved to Negotiation.", time: "1h ago", read: false },
-  { id: 3, title: "Activity reminder", body: "Follow-up call with TechCorp is due today.", time: "3h ago", read: false },
-]
+import { openGlobalSearch } from "@/components/global-search"
+import { useLocale, useTranslations } from "next-intl"
+import { useRouter, usePathname } from "@/i18n/routing"
 
 export function CrmHeader({ title, description }: { title: string; description?: string }) {
-  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
+  const t = useTranslations("Header")
+  const ts = useTranslations("Stages")
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+  
+  const [readIds, setReadIds] = useState<number[]>([])
+
+  const notifications = [
+    { 
+      id: 1, 
+      title: t("mock.newContact"), 
+      body: t("mock.newContactBody", {name: "Sarah Johnson"}), 
+      time: t("mock.time2m")
+    },
+    { 
+      id: 2, 
+      title: t("mock.dealStage"), 
+      body: t("mock.dealStageBody", {company: "Acme Corp", stage: ts("underwriting")}), 
+      time: t("mock.time1h")
+    },
+    { 
+      id: 3, 
+      title: t("mock.activity"), 
+      body: t("mock.activityBody", {company: "TechCorp"}), 
+      time: t("mock.time3h")
+    },
+  ].map(n => ({ ...n, read: readIds.includes(n.id) }))
+
   const unreadCount = notifications.filter((n) => !n.read).length
 
   function markAllRead() {
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })))
+    setReadIds(notifications.map(n => n.id))
+  }
+
+  function handleLanguageChange(newLocale: string) {
+    router.replace(pathname, {locale: newLocale})
   }
 
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b border-border bg-card px-4 lg:px-5">
-      <SidebarTrigger className="-ml-1 size-8 text-muted-foreground hover:bg-accent hover:text-foreground" />
+      <SidebarTrigger className="-ms-1 size-8 text-muted-foreground hover:bg-accent hover:text-foreground" />
       <Separator orientation="vertical" className="h-5 bg-border" />
 
       {/* Title */}
@@ -42,13 +71,36 @@ export function CrmHeader({ title, description }: { title: string; description?:
 
       {/* Right-side actions */}
       <div className="flex items-center gap-1">
-        <div className="relative hidden md:block">
-          <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search…"
-            className="h-8 w-44 rounded-lg border-border bg-secondary pl-8 text-xs text-foreground placeholder:text-muted-foreground focus-visible:ring-1 focus-visible:ring-ring"
-          />
-        </div>
+        {/* Search trigger — opens global command palette */}
+        <button
+          onClick={openGlobalSearch}
+          className="hidden md:flex h-8 w-52 items-center gap-2 rounded-lg border border-border bg-secondary px-2.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+        >
+          <Search className="size-3.5 shrink-0" />
+          <span className="flex-1 text-start">{t("search")}</span>
+          <div className="flex items-center gap-0.5 shrink-0">
+            <kbd className="rounded border border-border bg-background px-1 py-0.5 text-[9px] font-mono leading-none">⌘</kbd>
+            <kbd className="rounded border border-border bg-background px-1 py-0.5 text-[9px] font-mono leading-none">K</kbd>
+          </div>
+        </button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="size-8 text-muted-foreground hover:bg-accent hover:text-foreground">
+              <Languages className="size-4" />
+              <span className="sr-only">{t("language")}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => handleLanguageChange("en")} disabled={locale === "en"}>
+              English
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleLanguageChange("he")} disabled={locale === "he"}>
+              עברית (Hebrew)
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <ModeToggle />
 
         {/* Notifications */}
@@ -57,20 +109,20 @@ export function CrmHeader({ title, description }: { title: string; description?:
             <Button variant="ghost" size="icon" className="relative size-8 text-muted-foreground hover:bg-accent hover:text-foreground">
               <Bell className="size-4" />
               {unreadCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold leading-none text-primary-foreground">
+                <span className="absolute -end-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold leading-none text-primary-foreground">
                   {unreadCount}
                 </span>
               )}
-              <span className="sr-only">Notifications</span>
+              <span className="sr-only">{t("notifications")}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-80 p-0" sideOffset={8}>
             {/* Header */}
             <div className="flex items-center justify-between border-b border-border px-4 py-3">
               <div>
-                <p className="text-sm font-semibold">Notifications</p>
+                <p className="text-sm font-semibold">{t("notifications")}</p>
                 {unreadCount > 0 && (
-                  <p className="text-[11px] text-muted-foreground">{unreadCount} unread</p>
+                  <p className="text-[11px] text-muted-foreground">{t("unread", {count: unreadCount})}</p>
                 )}
               </div>
               {unreadCount > 0 && (
@@ -81,7 +133,7 @@ export function CrmHeader({ title, description }: { title: string; description?:
                   className="h-7 gap-1.5 px-2 text-xs text-muted-foreground hover:text-foreground"
                 >
                   <CheckCheck className="size-3.5" />
-                  Mark all read
+                  {t("markAllRead")}
                 </Button>
               )}
             </div>
@@ -91,8 +143,8 @@ export function CrmHeader({ title, description }: { title: string; description?:
               {notifications.map((n) => (
                 <button
                   key={n.id}
-                  onClick={() => setNotifications((prev) => prev.map((x) => x.id === n.id ? { ...x, read: true } : x))}
-                  className="flex w-full gap-3 px-4 py-3 text-left transition-colors hover:bg-accent"
+                  onClick={() => setReadIds(prev => prev.includes(n.id) ? prev : [...prev, n.id])}
+                  className="flex w-full gap-3 px-4 py-3 text-start transition-colors hover:bg-accent"
                 >
                   <div className={`mt-1.5 size-1.5 shrink-0 rounded-full ${n.read ? "bg-transparent" : "bg-primary"}`} />
                   <div className="min-w-0 flex-1">
@@ -107,7 +159,7 @@ export function CrmHeader({ title, description }: { title: string; description?:
             {/* Footer */}
             <div className="border-t border-border p-2">
               <Button variant="ghost" className="w-full h-8 text-xs text-muted-foreground hover:text-foreground">
-                View all notifications
+                {t("viewAll")}
               </Button>
             </div>
           </DropdownMenuContent>

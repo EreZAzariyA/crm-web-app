@@ -1,0 +1,775 @@
+{
+  "Sidebar": {
+    "navigation": "Navigation",
+    "system": "System",
+    "dashboard": "Dashboard",
+    "contacts": "Contacts",
+    "loans": "Loans",
+    "activity": "Activity",
+    "underwriting": "Underwriting",
+    "analytics": "Analytics",
+    "admin": "Admin",
+    "settings": "Settings",
+    "profile": "Profile",
+    "signout": "Sign out"
+  },
+  "Branding": {
+    "name": "Relay",
+    "description": "CRM Platform"
+  },
+  "Header": {
+    "search": "Search...",
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "viewAll": "View all notifications",
+    "unread": "{count} unread",
+    "language": "Language",
+    "mock": {
+      "newContact": "New contact added",
+      "newContactBody": "{name} was added to your contacts.",
+      "dealStage": "Deal stage updated",
+      "dealStageBody": "{company} deal moved to {stage}.",
+      "activity": "Activity reminder",
+      "activityBody": "Follow-up call with {company} is due today.",
+      "time2m": "2m ago",
+      "time1h": "1h ago",
+      "time3h": "3h ago"
+    }
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "description": "Overview of your sales pipeline",
+    "stats": {
+      "repaidCapital": "Repaid Capital",
+      "repaidLoans": "{count} repaid loan",
+      "repaidLoansPlural": "{count} repaid loans",
+      "activeContacts": "Active Contacts",
+      "newLeads": "{count} new leads",
+      "activeLoans": "Active Loans",
+      "totalInPortfolio": "{count} total in portfolio",
+      "approvalRate": "Approval Rate",
+      "wonClosed": "{won} won / {closed} closed"
+    },
+    "charts": {
+      "revenue": "Revenue Overview",
+      "revenueSub": "Repaid Loans by Month",
+      "pipeline": "Portfolio Value",
+      "pipelineSub": "By stage",
+      "recentDeals": "Recent Loans",
+      "activityFeed": "Activity Feed",
+      "riskDistribution": "Risk Distribution",
+      "riskDistributionSub": "{count} scored loans",
+      "stageFunnel": "Pipeline Funnel",
+      "stageFunnelSub": "Active stages",
+      "portfolioHealth": "Portfolio Health",
+      "viewAll": "View all",
+      "noRecent": "No recent activity",
+      "noScoredLoans": "No scored loans yet",
+      "riskDataHint": "Add credit score, LTV, or DTI to generate ratings",
+      "count": "Count",
+      "amount": "Amount",
+      "loans": "{count} loans",
+      "loan": "{count} loan"
+    },
+    "metrics": {
+      "defaultRate": "Default Rate",
+      "collectionRate": "Collection Rate",
+      "avgCreditScore": "Avg Credit Score",
+      "wtdAvgRate": "Wtd. Avg Rate"
+    }
+  },
+  "Stages": {
+    "lead": "Lead",
+    "pre_qualification": "Pre-Qual",
+    "underwriting": "Underwriting",
+    "approved": "Approved",
+    "active": "Active",
+    "monitoring": "Monitoring",
+    "collection": "Collection",
+    "closed_won": "Closed – Repaid",
+    "closed_lost": "Closed – Declined",
+    "default": "Default"
+  },
+  "Risk": {
+    "A": "Low Risk",
+    "B": "Moderate",
+    "C": "Elevated",
+    "D": "High Risk"
+  },
+  "Activity": {
+    "title": "Activity",
+    "description": "Recent interactions and updates",
+    "tabs": {
+      "timeline": "Timeline",
+      "calendar": "Calendar"
+    },
+    "filters": {
+      "all": "All Types",
+      "call": "Call",
+      "email": "Email",
+      "meeting": "Meeting",
+      "note": "Note"
+    },
+    "actions": {
+      "log": "Log Activity",
+      "exportImport": "Export / Import",
+      "export": "Export CSV",
+      "import": "Import CSV"
+    },
+    "empty": {
+      "title": "No activities yet",
+      "sub": "Log a call, email, meeting or note to get started"
+    },
+    "dialogs": {
+      "logTitle": "Log Activity",
+      "logSub": "Record a call, email, meeting, or note.",
+      "type": "Type",
+      "contact": "Contact",
+      "activityTitle": "Title *",
+      "notes": "Notes",
+      "deleteTitle": "Delete this activity?",
+      "deleteConfirm": "\"{title}\" will be permanently removed."
+    },
+    "import": {
+      "title": "Import Activities from CSV",
+      "description": "Upload a CSV file with headers like Type, Title, Contact, and Description.",
+      "mappingHint": "Valid types: Call, Email, Meeting, Note.",
+      "success": "Successfully imported {count} activities"
+    },
+    "calendar": {
+      "noActivities": "No activities for this day",
+      "selectDate": "Select a date"
+    },
+    "placeholders": {
+      "contact": "Jane Smith",
+      "title": "Discovery call with Acme Corp",
+      "notes": "What was discussed...",
+      "dropzone": "Click to upload or drag and drop",
+      "hint": "CSV files only (max 5MB)"
+    }
+  },
+  "Settings": {
+    "title": "Settings",
+    "description": "Manage your account settings and preferences",
+    "tabs": {
+      "profile": "Profile",
+      "notifications": "Notifications",
+      "appearance": "Appearance",
+      "account": "Account"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "sub": "Customize the look and feel of the application.",
+      "theme": "Theme",
+      "themeLight": "Light",
+      "themeDark": "Dark",
+      "themeSystem": "System",
+      "display": "Display",
+      "language": "Language",
+      "timezone": "Timezone",
+      "dateFormat": "Date Format",
+      "sidebarCollapse": "Collapse Sidebar by Default",
+      "sidebarCollapseSub": "Keep the navigation menu minimized",
+      "languages": {
+        "en": "English",
+        "he": "Hebrew"
+      },
+      "timezones": {
+        "pst": "Pacific Time (PST)",
+        "mst": "Mountain Time (MST)",
+        "cst": "Central Time (CST)",
+        "est": "Eastern Time (EST)",
+        "utc": "UTC",
+        "ist": "Israel Standard Time (IST)"
+      },
+      "dateFormats": {
+        "mdy": "MM/DD/YYYY",
+        "dmy": "DD/MM/YYYY",
+        "ymd": "YYYY-MM-DD"
+      }
+    },
+    "profile": {
+      "title": "Profile Information",
+      "sub": "Update your personal details and contact information.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company",
+      "role": "Role",
+      "location": "Location",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself...",
+      "changeAvatar": "Change Avatar",
+      "avatarHint": "JPG, PNG or GIF. Max 2MB.",
+      "saveSuccess": "Profile saved",
+      "saveError": "Failed to save profile"
+    },
+    "notifications": {
+      "title": "Notification Preferences",
+      "sub": "Choose how and when you want to be notified.",
+      "channels": "Channels",
+      "email": "Email Notifications",
+      "emailSub": "Receive notifications via email",
+      "push": "Push Notifications",
+      "pushSub": "Receive push notifications in browser",
+      "activity": "Activity",
+      "dealUpdates": "Deal Updates",
+      "dealUpdatesSub": "When a deal status or stage changes",
+      "contactUpdates": "Contact Updates",
+      "contactUpdatesSub": "When a contact is added or modified",
+      "activityAlerts": "Activity Alerts",
+      "activityAlertsSub": "When new activity is logged for your deals",
+      "reports": "Reports",
+      "weekly": "Weekly Summary",
+      "weeklySub": "Receive a weekly email with your CRM summary",
+      "saveSuccess": "Notification preferences saved",
+      "saveError": "Failed to save preferences",
+      "saveButton": "Save Preferences"
+    },
+    "account": {
+      "title": "Account & Security",
+      "sub": "Manage your account security and preferences.",
+      "password": "Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "updatePassword": "Update Password",
+      "passwordSuccess": "Password updated",
+      "passwordMismatch": "New passwords do not match",
+      "sessions": "Sessions",
+      "currentSession": "Current Session",
+      "active": "Active",
+      "dangerZone": "Danger Zone",
+      "deleteAccount": "Delete Account",
+      "deleteAccountSub": "Permanently delete your account and all associated data."
+    }
+  },
+  "Common": {
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "search": "Search...",
+    "done": "Done",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "previous": "Previous",
+    "next": "Next",
+    "more": "More"
+  },
+  "Search": {
+    "title": "Global Search",
+    "description": "Search across contacts, deals, and activities",
+    "placeholder": "Search contacts, deals, activities...",
+    "noResults": "No results for \"{query}\"",
+    "trySearching": "Try searching by name, email, or company",
+    "navigation": "Navigation",
+    "goTo": "Go to {label}",
+    "shortcuts": "↑↓ navigate · ↵ select · esc close"
+  },
+  "Contacts": {
+    "title": "Contacts",
+    "description": "Manage your contacts and leads",
+    "searchPlaceholder": "Search contacts...",
+    "addContact": "Add Contact",
+    "status": {
+      "lead": "Lead",
+      "prospect": "Prospect",
+      "customer": "Customer",
+      "churned": "Churned",
+      "all": "All Status"
+    },
+    "table": {
+      "name": "Name",
+      "company": "Company",
+      "role": "Role",
+      "status": "Status",
+      "lastActivity": "Last Activity",
+      "email": "Email",
+      "empty": "No contacts found",
+      "showing": "Showing {count} of {total} contacts"
+    },
+    "import": {
+      "title": "Import Contacts from CSV",
+      "description": "Upload a CSV file with headers like Name, Email, Company, Role, Phone, and Status.",
+      "dropzone": "Click to upload or drag and drop",
+      "hint": "CSV files only (max 5MB)",
+      "preview": "Preview (First 5 rows)",
+      "mappingHint": "Make sure your CSV columns match our expected names or similar (e.g., \"Full Name\" → \"Name\").",
+      "success": "Successfully imported {count} contacts",
+      "error": "Failed to import {count} rows. Check formatting.",
+      "button": "Import {target}"
+    },
+    "dialogs": {
+      "addTitle": "Add Contact",
+      "addDescription": "Fill in the details to add a new contact.",
+      "editTitle": "Edit Contact",
+      "editDescription": "Update the contact information below.",
+      "deleteTitle": "Delete {name}?",
+      "deleteDescription": "This action cannot be undone. The contact and all associated data will be permanently removed.",
+      "addToDealTitle": "Add to Deal",
+      "addToDealDescription": "Link {name} to an existing deal.",
+      "selectDeal": "Select Deal",
+      "chooseDeal": "Choose a deal...",
+      "noDeals": "No deals available.",
+      "linkButton": "Link to Deal"
+    },
+    "actions": {
+      "export": "Export CSV",
+      "import": "Import CSV",
+      "viewDetails": "View Details",
+      "editContact": "Edit Contact",
+      "addToDeal": "Add to Deal",
+      "delete": "Delete"
+    },
+    "form": {
+      "fullName": "Full Name *",
+      "email": "Email *",
+      "company": "Company",
+      "role": "Role",
+      "phone": "Phone",
+      "status": "Status",
+      "placeholders": {
+        "name": "Jane Smith",
+        "email": "jane@company.com",
+        "company": "Acme Corp",
+        "role": "VP of Sales",
+        "phone": "+1 555 000 0000"
+      }
+    },
+    "notFound": "Contact Not Found",
+    "notFoundSub": "This contact does not exist or has been deleted.",
+    "backToList": "Back to Contacts",
+    "allContacts": "All Contacts",
+    "email": "Email",
+    "call": "Call",
+    "edit": "Edit",
+    "delete": "Delete",
+    "info": "Contact Info",
+    "role": "Role",
+    "lastActivity": "Last Activity",
+    "summary": "Summary",
+    "deals": "Deals",
+    "activities": "Activities",
+    "totalPipeline": "Total Pipeline",
+    "noDeals": "No deals linked to this contact yet",
+    "noActivities": "No activities logged for this contact",
+    "closes": "Closes {date}",
+    "probability": "{count}% probability"
+  },
+  "Underwriting": {
+    "title": "Underwriting",
+    "description": "Review and decide on loans pending underwriting",
+    "pendingReview": "Pending Review · {count}",
+    "noLoans": "No loans in underwriting",
+    "noLoansSub": "Move a loan to the Underwriting stage to begin review.",
+    "selectToReview": "Select a loan to review",
+    "history": "Stage History",
+    "noHistory": "No stage history recorded yet.",
+    "decision": "Decision",
+    "reasonPlaceholder": "Decision reason (required for decline)...",
+    "approve": "Approve",
+    "decline": "Decline",
+    "decisionHint": "A reason is required to decline. Approved loans move to the Approved stage.",
+    "scorecardTitle": "Borrower Scorecard",
+    "checklistTitle": "Underwriting Checklist",
+    "checklistStatus": "{count}/{total} complete",
+    "insufficientData": "Insufficient data",
+    "checklistItems": {
+      "creditReport": "Credit report reviewed",
+      "incomeVerification": "Income verification complete",
+      "collateralAssessed": "Collateral assessed",
+      "legalDocuments": "Legal documents reviewed",
+      "bankStatements": "Bank statements verified",
+      "identityVerification": "Identity verification complete",
+      "propertyTitle": "Property title searched (if applicable)"
+    }
+  },
+  "Metrics": {
+    "creditScore": "Credit Score",
+    "ltv": "LTV Ratio",
+    "dti": "DTI Ratio",
+    "loanAmount": "Loan Amount",
+    "loanTerm": "Loan Term",
+    "interestRate": "Interest Rate",
+    "collateral": "Collateral",
+    "approvedAmt": "Approved Amt",
+    "riskScore": "Risk Score",
+    "months": "{count} mo"
+  },
+  "Analytics": {
+    "title": "Analytics",
+    "description": "Portfolio performance and risk analysis",
+    "tabs": {
+      "overview": "Overview",
+      "risk": "Risk Analysis",
+      "pipeline": "Pipeline",
+      "repayments": "Repayments"
+    },
+    "risk": {
+      "title": "Loan Risk Scores",
+      "loansCount": "{count} loans",
+      "table": {
+        "loan": "Loan",
+        "stage": "Stage",
+        "creditScore": "Credit Score",
+        "ltv": "LTV",
+        "dti": "DTI",
+        "score": "Score",
+        "rating": "Rating"
+      }
+    },
+    "pipeline": {
+      "conversionTitle": "Stage Conversion Rates",
+      "table": {
+        "stage": "Stage",
+        "loans": "Loans",
+        "conversion": "Conversion from prev."
+      }
+    },
+    "repayments": {
+      "title": "Expected Repayments by Month",
+      "sub": "Based on probability × loan amount",
+      "noDates": "No expected disbursement dates set.",
+      "table": {
+        "month": "Month",
+        "loans": "Loans",
+        "expected": "Expected Repayments",
+        "total": "Total"
+      }
+    }
+  },
+  "Admin": {
+    "title": "Admin",
+    "description": "Manage users, teams, roles, and workspace settings",
+    "tabs": {
+      "overview": "Overview",
+      "users": "Users",
+      "teams": "Teams",
+      "pipeline": "Pipeline"
+    },
+    "overview": {
+      "crm": "CRM Overview",
+      "workspace": "Workspace",
+      "recentMembers": "Recent Members",
+      "totalContacts": "Total Contacts",
+      "totalLoans": "Total Loans",
+      "portfolioValue": "Portfolio Value",
+      "totalActivities": "Total Activities",
+      "totalUsers": "Total Users",
+      "admins": "Admins",
+      "teams": "Teams",
+      "inactive": "Inactive",
+      "active": "Active",
+      "fullAccess": "Full Access",
+      "deactivated": "Deactivated",
+      "repaid": "repaid",
+      "logged": "logged",
+      "membersSub": "members"
+    },
+    "users": {
+      "searchPlaceholder": "Search users...",
+      "refresh": "Refresh",
+      "invite": "Invite User",
+      "inviteDescription": "Generate an invite link to share with the new user. The link expires in 7 days.",
+      "inviteGenerated": "Invite link generated!",
+      "inviteShareHint": "Share this link with {name} ({email}). The link expires in 7 days.",
+      "generateInvite": "Generate Invite Link",
+      "form": {
+        "firstName": "First Name *",
+        "lastName": "Last Name",
+        "email": "Email *",
+        "role": "System Role",
+        "team": "Team (optional)",
+        "noTeam": "No team"
+      },
+      "table": {
+        "name": "Name",
+        "email": "Email",
+        "team": "Team",
+        "role": "System Role",
+        "status": "Status",
+        "joined": "Joined {date}",
+        "you": "you",
+        "cantModifySelf": "Cannot modify your own account",
+        "changeRole": "Change Role",
+        "assignTeam": "Assign to Team"
+      },
+      "dialogs": {
+        "assignTeamTitle": "Assign {name} to Team",
+        "assignTeamDescription": "Select a team for this user. They will share data with other team members.",
+        "selectTeam": "Select Team",
+        "noTeam": "No Team (Remove from Team)"
+      },
+      "noResults": "No users match your search",
+      "noUsers": "No users found",
+      "showing": "Showing {count} of {total} users",
+      "pendingInvites": "Pending Invites ({count})",
+      "unnamed": "(unnamed)",
+      "expires": "Expires {date}",
+      "revoke": "Revoke"
+    },
+    "pipeline": {
+      "conversionTitle": "Stage Conversion Rates",
+      "conversionSub": "Current stage configuration and deal distribution",
+      "table": {
+        "loansCount": "{count} {count, plural, one {loan} other {loans}}",
+        "value": "Value",
+        "weighted": "Weighted",
+        "pctOfTotal": "{count}% of total loans",
+        "totalLoansAcross": "{count} total loans across all stages",
+        "totalPipeline": "total pipeline"
+      }
+    },
+    "roles": {
+      "admin": "Admin",
+      "manager": "Manager",
+      "user": "User",
+      "makeAdmin": "Make Admin",
+      "makeManager": "Make Manager",
+      "makeUser": "Make User",
+      "activate": "Activate",
+      "deactivate": "Deactivate"
+    },
+    "teams": {
+      "count": "{count} teams",
+      "create": "Create Team",
+      "noTeams": "No teams yet",
+      "noTeamsSub": "Create a team to share CRM data between users",
+      "members": "{count} members",
+      "lead": "Lead: {name}",
+      "noMembers": "No members yet",
+      "addMember": "Add member",
+      "deleteTitle": "Delete \"{name}\"?",
+      "deleteSub": "This will remove the team and unassign all {count} members. Their data will remain but they will no longer share CRM data.",
+      "dialogs": {
+        "createTitle": "Create Team",
+        "createSub": "Create a team to share CRM data between members.",
+        "name": "Team Name *",
+        "desc": "Description",
+        "nameRequired": "Team name is required",
+        "userRequired": "Select a user",
+        "namePlaceholder": "Sales Team",
+        "editTitle": "Edit Team",
+        "addMemberTitle": "Add Member to \"{name}\"",
+        "addMemberSub": "Select a user to add to this team. They will immediately share team data.",
+        "userLabel": "User *",
+        "roleLabel": "Team Role",
+        "member": "Member",
+        "teamLead": "Team Lead",
+        "allInTeam": "All active users are already in this team"
+      }
+    }
+  },
+  "Auth": {
+    "login": {
+      "title": "Sign in to Relay",
+      "sub": "Enter your credentials to continue",
+      "email": "Email",
+      "password": "Password",
+      "signInEmail": "Sign in with Email",
+      "signingIn": "Signing in...",
+      "inviteOnly": "Access is by invitation only. Contact your admin for access.",
+      "error": "Something went wrong."
+    },
+    "register": {
+      "title": "Access by invitation only",
+      "sub": "New accounts are created by your workspace admin via invite link. Contact your admin to request access.",
+      "backToSignIn": "Back to sign in"
+    },
+    "invite": {
+      "title": "You're invited!",
+      "sub": "Complete your account setup for Relay CRM",
+      "role": "Role",
+      "setPass": "Set Password",
+      "confirmPass": "Confirm Password",
+      "createAccount": "Create Account",
+      "alreadyHave": "Already have an account?",
+      "signIn": "Sign in",
+      "success": "Account created!",
+      "redirecting": "Redirecting you to the dashboard...",
+      "expired": "Invite expired",
+      "used": "Invite already used",
+      "invalid": "Invalid invite",
+      "passMinLen": "Password must be at least 8 characters",
+      "passMismatch": "Passwords do not match",
+      "accountFailed": "Failed to create account",
+      "validateFailed": "Failed to validate invite link",
+      "invalidLink": "Invalid invite link"
+    },
+    "errors": {
+      "oauth_cancelled": "Sign-in was cancelled.",
+      "oauth_failed": "OAuth sign-in failed. Please try again.",
+      "no_email": "Could not retrieve your email from the provider.",
+      "invite_required": "No account found. Please use your invite link to register.",
+      "account_deactivated": "Your account has been deactivated. Contact your admin."
+    }
+  },
+  "Tiers": {
+    "excellent": "Excellent",
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor",
+    "unscored": "Unscored"
+  },
+  "DateFormat": {
+    "short": "{month} {day}, {year}"
+  },
+  "Toasts": {
+    "saveSuccess": "Changes saved successfully",
+    "saveError": "Failed to save changes",
+    "error": "Something went wrong",
+    "requiredFields": "Required fields are missing",
+    "deleteSuccess": "Item deleted",
+    "deleteError": "Failed to delete item",
+    "updateSuccess": "Updated successfully",
+    "updateError": "Failed to update",
+    "importSuccess": "Import completed successfully",
+    "importError": "Import failed. Check formatting.",
+    "linkSuccess": "Linked successfully",
+    "linkError": "Failed to link",
+    "uploadSuccess": "File uploaded successfully",
+    "uploadError": "Upload failed",
+    "inviteRevoked": "Invite revoked",
+    "rescoreSuccess": "Re-scored successfully"
+  },
+  "Loans": {
+    "title": "Loans",
+    "description": "Manage your loan applications and lending pipeline",
+    "searchPlaceholder": "Search loans...",
+    "newLoan": "New Loan Application",
+    "pipeline": "Pipeline",
+    "list": "List",
+    "allStages": "All Stages",
+    "actions": {
+      "viewDetails": "View Details",
+      "editLoan": "Edit Loan",
+      "delete": "Delete",
+      "export": "Export CSV",
+      "import": "Import CSV",
+      "exportImport": "Export / Import"
+    },
+    "stats": {
+      "activePortfolio": "Active Portfolio",
+      "expectedRepayments": "Expected Repayments",
+      "avgLoanSize": "Avg Loan Size",
+      "approvalRate": "Approval Rate"
+    },
+    "stageDescriptions": {
+      "lead": "Initial inquiry or referral",
+      "pre_qualification": "Basic eligibility assessed",
+      "underwriting": "Full due diligence in progress",
+      "approved": "Loan terms agreed, pending disbursement",
+      "active": "Disbursed, in repayment",
+      "monitoring": "Under enhanced monitoring",
+      "collection": "Past due, collections initiated",
+      "closed_won": "Fully repaid",
+      "closed_lost": "Declined or withdrawn",
+      "default": "Formally in default"
+    },
+    "import": {
+      "title": "Import Loans from CSV",
+      "description": "Upload a CSV file with headers like Title, Company, Value, Stage, Contact, and ExpectedClose.",
+      "mappingHint": "Stages will be matched to Lead, Underwriting, Approved, etc.",
+      "success": "Successfully imported {count} loans"
+    },
+    "dialogs": {
+      "addTitle": "New Loan Application",
+      "addDescription": "Fill in the details to add a new loan application to the pipeline.",
+      "editTitle": "Edit Loan Application",
+      "editDescription": "Update the loan application details below.",
+      "moveTitle": "Move Stage",
+      "moveDescription": "Move {name} to the next stage. Only valid transitions are shown.",
+      "deleteTitle": "Delete \"{name}\"?",
+      "deleteDescription": "This action cannot be undone.",
+      "reasonLabel": "Reason (optional)",
+      "reasonPlaceholder": "Why is this loan being removed?",
+      "noTransitions": "No valid transitions from this stage.",
+      "selected": "Selected",
+      "noLoans": "No loans found",
+      "dropHere": "Drop here",
+      "noLoansCol": "No loans",
+      "closedCol": "Closed & Default ({count} loans)"
+    },
+    "form": {
+      "tabs": {
+        "details": "Loan Details",
+        "documents": "Documents"
+      },
+      "core": {
+        "title": "Loan Title *",
+        "borrower": "Borrower / Company",
+        "contact": "Primary Contact",
+        "amount": "Loan Amount ($) *",
+        "probability": "Repayment Probability (%)",
+        "stage": "Lifecycle Stage",
+        "disbursement": "Expected Disbursement",
+        "notes": "Notes"
+      },
+      "lending": {
+        "title": "Lending Details",
+        "rate": "Interest Rate (%)",
+        "term": "Loan Term (months)",
+        "ltv": "LTV Ratio (%)",
+        "dti": "DTI Ratio (%)",
+        "creditScore": "Credit Score",
+        "riskRating": "Risk Rating",
+        "approvedAmount": "Approved Amount ($)",
+        "origFee": "Origination Fee (%)",
+        "disbDate": "Disbursement Date",
+        "matDate": "Maturity Date",
+        "collateral": "Collateral Value ($)"
+      },
+      "placeholders": {
+        "title": "Commercial Bridge Loan – Acme",
+        "borrower": "Acme Corp",
+        "contact": "Jane Smith",
+        "notes": "Key details, collateral info, next steps..."
+      }
+    },
+    "documents": {
+      "title": "Documents",
+      "dropzone": "Click or drag to upload",
+      "hint": "CSV, Excel (.xlsx / .xls), or PDF · max 10 MB",
+      "uploading": "Uploading...",
+      "noDocs": "No documents uploaded yet.",
+      "saveFirst": "Save the loan first to upload documents.",
+      "applyData": "Apply Extracted Data to Form",
+      "extracted": {
+        "revenue": "Monthly Revenue",
+        "dti": "Suggested DTI",
+        "balance": "Account Balance",
+        "maxLoan": "Max Loan (est.)"
+      }
+    },
+    "riskAssessment": {
+      "title": "Risk Assessment",
+      "rescore": "Re-score",
+      "rescoreSuccess": "Re-scored: Rating {rating} ({score}/100)",
+      "hint": "Add credit score, LTV, or DTI to generate a risk score."
+    },
+    "view": {
+      "amount": "Loan Amount",
+      "probability": "Repayment Probability",
+      "repayments": "Expected Repayments",
+      "details": "Details",
+      "reason": "Reason",
+      "schedule": "Schedule",
+      "amortization": {
+        "title": "Amortization Schedule",
+        "monthlyPayment": "Monthly Payment",
+        "totalInterest": "Total Interest",
+        "totalPaid": "Total Paid",
+        "payments": "# Payments",
+        "month": "Month",
+        "payment": "Payment",
+        "principal": "Principal",
+        "interest": "Interest",
+        "balance": "Balance",
+        "exportCSV": "Export CSV",
+        "noData": "Set an interest rate and loan term to generate the schedule."
+      }
+    }
+  }
+}

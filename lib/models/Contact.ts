@@ -2,6 +2,7 @@ import { Schema, models, model, Document, Types } from 'mongoose'
 
 export interface IContact extends Document {
   userId: Types.ObjectId
+  teamId: Types.ObjectId | null
   name: string
   email: string
   company: string
@@ -15,6 +16,7 @@ export interface IContact extends Document {
 const ContactSchema = new Schema<IContact>(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+    teamId: { type: Schema.Types.ObjectId, ref: 'Team', default: null, index: true },
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, lowercase: true },
     company: { type: String, default: '' },

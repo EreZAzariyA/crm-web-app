@@ -2,6 +2,7 @@ import { Schema, models, model, Document, Types } from 'mongoose'
 
 export interface IActivity extends Document {
   userId: Types.ObjectId
+  teamId: Types.ObjectId | null
   type: 'email' | 'call' | 'meeting' | 'note'
   title: string
   contact: string
@@ -12,6 +13,7 @@ export interface IActivity extends Document {
 const ActivitySchema = new Schema<IActivity>(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+    teamId: { type: Schema.Types.ObjectId, ref: 'Team', default: null, index: true },
     type: {
       type: String,
       enum: ['email', 'call', 'meeting', 'note'],

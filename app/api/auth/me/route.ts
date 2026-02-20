@@ -25,6 +25,8 @@ export async function GET(req: NextRequest) {
         phone: user.phone,
         company: user.company,
         role: user.role,
+        systemRole: user.systemRole ?? 'user',
+        teamId: user.teamId?.toString() ?? null,
         location: user.location,
         bio: user.bio,
         notifications: user.notifications,

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { CrmService, type Activity } from '@/lib/crm-service'
+import { logoutUser, loginUser } from '@/lib/features/auth/authSlice'
 
 interface ActivitiesState {
   items: Activity[]
@@ -52,6 +53,9 @@ const activitiesSlice = createSlice({
       .addCase(deleteActivity.fulfilled, (state, action) => {
         state.items = state.items.filter((a) => a.id !== action.payload)
       })
+      // Reset data when the user logs out or logs in as a different user
+      .addCase(logoutUser.fulfilled, () => initialState)
+      .addCase(loginUser.fulfilled, () => initialState)
   },
 })
 

@@ -1,10 +1,11 @@
 "use client"
 
-import Link from "next/link"
+import {Link} from "@/i18n/routing"
 import { Mail, Phone, Calendar, StickyNote } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useAppSelector } from "@/lib/hooks"
+import { useTranslations } from "next-intl"
 
 const typeIcons = {
   email:   Mail,
@@ -21,6 +22,7 @@ const typeColors = {
 }
 
 export function ActivityFeed() {
+  const t = useTranslations("Dashboard.charts")
   const { items: activities } = useAppSelector((s) => s.activities)
   const recent = activities.slice(0, 5)
 
@@ -28,13 +30,13 @@ export function ActivityFeed() {
     <Card className="border-border bg-card">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-medium text-foreground">Recent Activity</CardTitle>
-          <Link href="/activity" className="text-xs text-primary hover:underline">View all</Link>
+          <CardTitle className="text-sm font-medium text-foreground">{t("activityFeed")}</CardTitle>
+          <Link href="/activity" className="text-xs text-primary hover:underline">{t("viewAll")}</Link>
         </div>
       </CardHeader>
       <CardContent className="pt-0">
         {recent.length === 0 ? (
-          <p className="py-4 text-center text-xs text-muted-foreground">No recent activity</p>
+          <p className="py-4 text-center text-xs text-muted-foreground">{t("noRecent")}</p>
         ) : (
           <div className="flex flex-col gap-4">
             {recent.map((activity) => {

@@ -9,10 +9,13 @@ import {
   ChevronDown,
   LogOut,
   User,
+  ShieldCheck,
+  BarChart2,
+  ClipboardCheck,
 } from "lucide-react"
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import {Link, usePathname, useRouter} from "@/i18n/routing"
 import { useEffect, useState } from "react"
+import { useTranslations, useLocale } from "next-intl"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
@@ -41,17 +44,21 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { logoutUser } from "@/lib/features/auth/authSlice"
 
 const navItems = [
-  { title: "Dashboard", href: "/", icon: LayoutDashboard },
-  { title: "Contacts",  href: "/contacts", icon: Users },
-  { title: "Deals",     href: "/deals", icon: Kanban },
-  { title: "Activity",  href: "/activity", icon: Activity },
+  { titleKey: "dashboard",    href: "/",             icon: LayoutDashboard },
+  { titleKey: "contacts",     href: "/contacts",     icon: Users },
+  { titleKey: "loans",        href: "/deals",        icon: Kanban },
+  { titleKey: "analytics",    href: "/analytics",    icon: BarChart2 },
+  { titleKey: "underwriting", href: "/underwriting", icon: ClipboardCheck },
+  { titleKey: "activity",     href: "/activity",     icon: Activity },
 ]
 
 const secondaryItems = [
-  { title: "Settings", href: "/settings", icon: Settings },
+  { titleKey: "settings", href: "/settings", icon: Settings },
 ]
 
 export function AppSidebar() {
+  const t = useTranslations("Sidebar")
+  const tb = useTranslations("Branding")
   const pathname = usePathname()
   const router = useRouter()
   const dispatch = useAppDispatch()
@@ -77,17 +84,23 @@ export function AppSidebar() {
     ? `${user.firstName?.[0] ?? ""}${user.lastName?.[0] ?? ""}`.toUpperCase() || user.email[0].toUpperCase()
     : ""
 
+  // Only show Admin nav item after hydration to avoid hydration mismatch
+  const isAdmin = mounted && user?.systemRole === "admin"
+
+  const isHe = useLocale() === "he"
+  const sidebarBtnClass = "h-9 gap-3 rounded-md px-3 text-sm font-medium text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold"
+
   return (
-    <Sidebar collapsible="icon" className="border-r border-sidebar-border">
+    <Sidebar side={isHe ? "right" : "left"} collapsible="icon" className="border-r border-sidebar-border">
       {/* ── Logo / Brand ── */}
       <SidebarHeader className="h-14 justify-center border-b border-sidebar-border px-4">
         <div className="flex items-center gap-3">
           <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary shadow-sm">
-            <span className="text-sm font-bold text-primary-foreground">R</span>
+            <span className="text-sm font-bold text-primary-foreground">{tb("name")[0]}</span>
           </div>
           <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold text-sidebar-foreground">Relay</span>
-            <span className="text-[11px] text-muted-foreground">CRM Platform</span>
+            <span className="text-sm font-semibold text-sidebar-foreground">{tb("name")}</span>
+            <span className="text-[11px] text-muted-foreground">{tb("description")}</span>
           </div>
         </div>
       </SidebarHeader>
@@ -96,27 +109,28 @@ export function AppSidebar() {
         {/* Navigation */}
         <SidebarGroup className="p-0">
           <SidebarGroupLabel className="px-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/70">
-            Navigation
+            {t("navigation")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => {
                 const badge =
-                  item.href === "/contacts" && contactCount > 0 ? String(contactCount) :
-                  item.href === "/deals" && dealCount > 0 ? String(dealCount) :
-                  item.href === "/activity" && activityCount > 0 ? String(activityCount) :
+                  item.href === "/contacts"  && contactCount  > 0 ? String(contactCount)  :
+                  item.href === "/deals"     && dealCount     > 0 ? String(dealCount)     :
+                  item.href === "/activity"  && activityCount > 0 ? String(activityCount) :
                   null
+                const title = t(item.titleKey as any)
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton
                       asChild
-                      isActive={pathname === item.href}
-                      tooltip={item.title}
-                      className="h-9 gap-3 rounded-md px-3 text-sm font-medium text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold"
+                      isActive={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)}
+                      tooltip={title}
+                      className={sidebarBtnClass}
                     >
                       <Link href={item.href}>
                         <item.icon className="size-4 shrink-0" />
-                        <span>{item.title}</span>
+                        <span>{title}</span>
                       </Link>
                     </SidebarMenuButton>
                     {badge && (
@@ -136,25 +150,44 @@ export function AppSidebar() {
         {/* System */}
         <SidebarGroup className="p-0">
           <SidebarGroupLabel className="px-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/70">
-            System
+            {t("system")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {secondaryItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
+              {/* Admin — only visible to admin users */}
+              {isAdmin && (
+                <SidebarMenuItem>
                   <SidebarMenuButton
                     asChild
-                    isActive={pathname === item.href}
-                    tooltip={item.title}
-                    className="h-9 gap-3 rounded-md px-3 text-sm font-medium text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold"
+                    isActive={pathname.startsWith("/admin")}
+                    tooltip={t("admin")}
+                    className={sidebarBtnClass}
                   >
-                    <Link href={item.href}>
-                      <item.icon className="size-4 shrink-0" />
-                      <span>{item.title}</span>
+                    <Link href="/admin">
+                      <ShieldCheck className="size-4 shrink-0" />
+                      <span>{t("admin")}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
+              )}
+              {secondaryItems.map((item) => {
+                const title = t(item.titleKey as any)
+                return (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === item.href}
+                      tooltip={title}
+                      className={sidebarBtnClass}
+                    >
+                      <Link href={item.href}>
+                        <item.icon className="size-4 shrink-0" />
+                        <span>{title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                )
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -170,7 +203,7 @@ export function AppSidebar() {
                   {initials}
                 </AvatarFallback>
               </Avatar>
-              <div className="flex min-w-0 flex-1 flex-col text-left group-data-[collapsible=icon]:hidden">
+              <div className="flex min-w-0 flex-1 flex-col text-start group-data-[collapsible=icon]:hidden">
                 <span className="truncate text-xs font-semibold text-sidebar-foreground">{fullName}</span>
                 <span className="truncate text-[11px] text-muted-foreground">{email}</span>
               </div>
@@ -188,13 +221,13 @@ export function AppSidebar() {
             <DropdownMenuItem asChild>
               <Link href="/settings" className="flex items-center gap-2 cursor-pointer">
                 <User className="size-3.5" />
-                Profile
+                {t("profile")}
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link href="/settings" className="flex items-center gap-2 cursor-pointer">
                 <Settings className="size-3.5" />
-                Settings
+                {t("settings")}
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -203,7 +236,7 @@ export function AppSidebar() {
               className="flex items-center gap-2 text-destructive focus:text-destructive cursor-pointer"
             >
               <LogOut className="size-3.5" />
-              Sign out
+              {t("signout")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -211,3 +244,4 @@ export function AppSidebar() {
     </Sidebar>
   )
 }
+

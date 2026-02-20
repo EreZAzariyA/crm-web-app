@@ -5,6 +5,7 @@ const secret = new TextEncoder().encode(process.env.JWT_SECRET!)
 export interface JWTPayload {
   userId: string
   email: string
+  systemRole: 'admin' | 'manager' | 'user'
 }
 
 export async function signToken(payload: JWTPayload): Promise<string> {

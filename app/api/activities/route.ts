@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { connectDB } from '@/lib/db/mongodb'
 import Activity from '@/lib/models/Activity'
+import User from '@/lib/models/User'
+import { getScopeFilter } from '@/lib/utils/api-utils'
 
 const createActivitySchema = z.object({
   type: z.enum(['email', 'call', 'meeting', 'note']),
@@ -28,11 +30,13 @@ function timeAgo(date: Date): string {
 export async function GET(req: NextRequest) {
   try {
     const userId = req.headers.get('x-user-id')
+    const systemRole = req.headers.get('x-user-system-role')
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     await connectDB()
 
-    const activities = await Activity.find({ userId }).sort({ createdAt: -1 }).lean()
+    const scopeFilter = await getScopeFilter(userId, systemRole)
+    const activities = await Activity.find(scopeFilter).sort({ createdAt: -1 }).lean()
 
     return NextResponse.json(
       activities.map((a) => ({
@@ -62,7 +66,10 @@ export async function POST(req: NextRequest) {
 
     await connectDB()
 
-    const activity = await Activity.create({ userId, ...parsed.data })
+    const user = await User.findById(userId).select('teamId').lean()
+    const teamId = user?.teamId ?? null
+
+    const activity = await Activity.create({ userId, teamId, ...parsed.data })
 
     return NextResponse.json(
       {

@@ -8,7 +8,9 @@ export interface UserProfile {
   lastName: string
   phone: string
   company: string
-  role: string
+  role: string          // job title (free text)
+  systemRole: 'admin' | 'manager' | 'user'
+  teamId: string | null
   location: string
   bio: string
   notifications: {
@@ -21,6 +23,8 @@ export interface UserProfile {
   }
   appearance: {
     language: string
+    theme: 'light' | 'dark' | 'system'
+    sidebarCollapsed: boolean
     timezone: string
     dateFormat: string
   }
