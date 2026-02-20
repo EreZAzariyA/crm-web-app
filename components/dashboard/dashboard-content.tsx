@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Loader2 } from "lucide-react"
 import { CrmHeader } from "@/components/crm-header"
 import { StatCards } from "@/components/dashboard/stat-cards"
@@ -16,8 +16,10 @@ export function DashboardContent() {
   const dispatch = useAppDispatch()
   const contactsStatus = useAppSelector((state) => state.contacts.status)
   const dealsStatus = useAppSelector((state) => state.deals.status)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     if (contactsStatus === 'idle') {
       dispatch(fetchContacts())
     }
@@ -26,9 +28,10 @@ export function DashboardContent() {
     }
   }, [contactsStatus, dealsStatus, dispatch])
 
+  // Only show the loading spinner on the client after mount to avoid hydration mismatch
   const isLoading = contactsStatus === 'loading' || dealsStatus === 'loading'
 
-  if (isLoading && contactsStatus !== 'succeeded' && dealsStatus !== 'succeeded') {
+  if (mounted && isLoading && contactsStatus !== 'succeeded' && dealsStatus !== 'succeeded') {
     return (
       <div className="flex h-screen items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />

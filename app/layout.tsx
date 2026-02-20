@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
 import StoreProvider from './StoreProvider'
 import './globals.css'
 
@@ -45,11 +46,11 @@ export default function RootLayout({
         <StoreProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
-            disableTransitionOnChange
           >
             {children}
+            <Toaster richColors position="bottom-right" />
             <Analytics debug={false} />
           </ThemeProvider>
         </StoreProvider>

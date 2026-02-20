@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useEffect, useState } from "react"
 import {
   Area,
   AreaChart,
@@ -10,12 +10,42 @@ import {
   YAxis,
   Tooltip,
 } from "recharts"
-import { format, parse, compareAsc } from "date-fns"
+import { format, compareAsc } from "date-fns"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useAppSelector } from "@/lib/hooks"
 
+/** Read a CSS variable from :root as a string, falling back to the provided default. */
+function getCssVar(name: string, fallback: string) {
+  if (typeof window === "undefined") return fallback
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback
+}
+
 export function RevenueChart() {
   const { items: deals } = useAppSelector((state) => state.deals)
+  const [colors, setColors] = useState({
+    primary: "#10b981",
+    border: "#e2e8f0",
+    mutedFg: "#64748b",
+    card: "#ffffff",
+    cardFg: "#0f172a",
+  })
+
+  // Re-read CSS vars whenever theme changes
+  useEffect(() => {
+    function readColors() {
+      setColors({
+        primary: getCssVar("--primary", "#10b981"),
+        border: getCssVar("--border", "#e2e8f0"),
+        mutedFg: getCssVar("--muted-foreground", "#64748b"),
+        card: getCssVar("--card", "#ffffff"),
+        cardFg: getCssVar("--card-foreground", "#0f172a"),
+      })
+    }
+    readColors()
+    const observer = new MutationObserver(readColors)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+    return () => observer.disconnect()
+  }, [])
 
   const revenueData = useMemo(() => {
     const monthlyData = new Map<string, { revenue: number; deals: number; date: Date }>()
@@ -23,28 +53,26 @@ export function RevenueChart() {
     deals
       .filter((deal) => deal.stage === "closed-won")
       .forEach((deal) => {
-        // Parse date "Mar 15, 2026"
         const date = new Date(deal.expectedClose)
-        if (isNaN(date.getTime())) return // Skip invalid dates
+        if (isNaN(date.getTime())) return
 
-        const monthKey = format(date, "MMM") // "Mar"
-        
+        const monthKey = format(date, "MMM")
+
         if (!monthlyData.has(monthKey)) {
           monthlyData.set(monthKey, { revenue: 0, deals: 0, date })
         }
-        
+
         const current = monthlyData.get(monthKey)!
         current.revenue += deal.value
         current.deals += 1
       })
 
-    // Convert to array and sort by date
     return Array.from(monthlyData.entries())
       .map(([month, data]) => ({
         month,
         revenue: data.revenue,
         deals: data.deals,
-        date: data.date
+        date: data.date,
       }))
       .sort((a, b) => compareAsc(a.date, b.date))
   }, [deals])
@@ -65,33 +93,33 @@ export function RevenueChart() {
             <AreaChart data={revenueData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="oklch(0.65 0.2 160)" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="oklch(0.65 0.2 160)" stopOpacity={0} />
+                  <stop offset="0%" stopColor={colors.primary} stopOpacity={0.25} />
+                  <stop offset="100%" stopColor={colors.primary} stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid
                 strokeDasharray="3 3"
-                stroke="oklch(0.26 0.005 260)"
+                stroke={colors.border}
                 vertical={false}
               />
               <XAxis
                 dataKey="month"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }}
+                tick={{ fill: colors.mutedFg, fontSize: 12 }}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }}
+                tick={{ fill: colors.mutedFg, fontSize: 12 }}
                 tickFormatter={(value) => `$${value / 1000}k`}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "oklch(0.17 0.005 260)",
-                  border: "1px solid oklch(0.26 0.005 260)",
+                  backgroundColor: colors.card,
+                  border: `1px solid ${colors.border}`,
                   borderRadius: "8px",
-                  color: "oklch(0.95 0 0)",
+                  color: colors.cardFg,
                   fontSize: "12px",
                 }}
                 formatter={(value: number) => [`$${value.toLocaleString()}`, "Revenue"]}
@@ -99,7 +127,7 @@ export function RevenueChart() {
               <Area
                 type="monotone"
                 dataKey="revenue"
-                stroke="oklch(0.65 0.2 160)"
+                stroke={colors.primary}
                 strokeWidth={2}
                 fill="url(#revenueGradient)"
               />

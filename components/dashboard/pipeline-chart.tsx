@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useEffect, useState } from "react"
 import {
   Bar,
   BarChart,
@@ -21,11 +21,40 @@ const stageMapping: Record<string, string> = {
   "closed-lost": "Closed Lost",
 }
 
+/** Read a CSS variable from :root as a string, falling back to the provided default. */
+function getCssVar(name: string, fallback: string) {
+  if (typeof window === "undefined") return fallback
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback
+}
+
 export function PipelineChart() {
   const { items: deals } = useAppSelector((state) => state.deals)
+  const [colors, setColors] = useState({
+    primary: "#10b981",
+    border: "#e2e8f0",
+    mutedFg: "#64748b",
+    card: "#ffffff",
+    cardFg: "#0f172a",
+  })
+
+  // Re-read CSS vars whenever theme changes
+  useEffect(() => {
+    function readColors() {
+      setColors({
+        primary: getCssVar("--primary", "#10b981"),
+        border: getCssVar("--border", "#e2e8f0"),
+        mutedFg: getCssVar("--muted-foreground", "#64748b"),
+        card: getCssVar("--card", "#ffffff"),
+        cardFg: getCssVar("--card-foreground", "#0f172a"),
+      })
+    }
+    readColors()
+    const observer = new MutationObserver(readColors)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+    return () => observer.disconnect()
+  }, [])
 
   const pipelineData = useMemo(() => {
-    // Initialize map with all stages to ensure they appear even if empty
     const stages = new Map([
       ["Discovery", { value: 0, count: 0 }],
       ["Proposal", { value: 0, count: 0 }],
@@ -67,34 +96,34 @@ export function PipelineChart() {
             <BarChart data={pipelineData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <CartesianGrid
                 strokeDasharray="3 3"
-                stroke="oklch(0.26 0.005 260)"
+                stroke={colors.border}
                 vertical={false}
               />
               <XAxis
                 dataKey="stage"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "oklch(0.6 0 0)", fontSize: 11 }}
+                tick={{ fill: colors.mutedFg, fontSize: 11 }}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }}
+                tick={{ fill: colors.mutedFg, fontSize: 12 }}
                 tickFormatter={(value) => `$${value / 1000}k`}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "oklch(0.17 0.005 260)",
-                  border: "1px solid oklch(0.26 0.005 260)",
+                  backgroundColor: colors.card,
+                  border: `1px solid ${colors.border}`,
                   borderRadius: "8px",
-                  color: "oklch(0.95 0 0)",
+                  color: colors.cardFg,
                   fontSize: "12px",
                 }}
                 formatter={(value: number) => [`$${value.toLocaleString()}`, "Value"]}
               />
               <Bar
                 dataKey="value"
-                fill="oklch(0.65 0.2 160)"
+                fill={colors.primary}
                 radius={[4, 4, 0, 0]}
                 barSize={40}
               />

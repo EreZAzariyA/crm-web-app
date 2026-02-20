@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(del \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\middleware.ts\")",
+      "Bash(Remove-Item \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\middleware.ts\")",
+      "Bash(dir:*)",
+      "Bash(del \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\app\\\\api\\\\seed\\\\route.ts\")",
+      "Bash(python3:*)",
+      "Bash(powershell -Command \"\n@''\ndeals_path = r''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\components\\\\deals\\\\deals-content.tsx''\nactivity_path = r''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\components\\\\activity\\\\activity-content.tsx''\n\nwith open\\(deals_path, ''w'', encoding=''utf-8'', newline=''\\\\n''\\) as f:\n    pass\n\nwith open\\(activity_path, ''w'', encoding=''utf-8'', newline=''\\\\n''\\) as f:\n    pass\n\nprint\\(''Files created successfully''\\)\n''@ | Out-File -FilePath ''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\write_files.py'' -Encoding UTF8\n\")",
+      "Bash(powershell -NoProfile -Command \"\n# Write the Python writer script\n$script = @''\nimport base64, os\n\n# deals-content.tsx  \\(base64-encoded to avoid any escaping issues\\)\ndeals_b64 = \\(\n    ''InVzZSBjbGllbnQiCgppbXBvcnQgeyBzdGF0ZUNoYW5nZSwgdXNlRWZmZWN0IH0gZnJvbSAi''\n\\)\n\n# We will write content directly using raw strings\ndeals_path = r''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\components\\\\deals\\\\deals-content.tsx''\nprint\\(''Script running OK''\\)\n''@\n$script | Out-File -FilePath ''C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\_writer.py'' -Encoding UTF8\npython C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\_writer.py\n\")",
+      "Bash(echo:*)",
+      "Bash(ls -la \"C:\\\\Users\\\\EAZ\\\\Desktop\\\\crm-web-app\\\\components\\\\contacts\"\" 2>/dev/null || echo \"Directory not found \")",
+      "Bash(ls:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'input=$(cat); FILE_PATH=$(echo \"$input\" | jq -r \".tool_input.file_path // empty\"); SUCCESS=$(echo \"$input\" | jq -r \".tool_response.success // false\"); if [ \"$SUCCESS\" = \"true\" ] && [[ \"$FILE_PATH\" =~ \\.(js|jsx|ts|tsx)$ ]] && [[ ! \"$FILE_PATH\" =~ node_modules ]]; then echo \"🔍 Next.js Code Quality Enforcer: Reviewing $FILE_PATH...\"; ISSUES=0; if [ -f \"$FILE_PATH\" ]; then if [[ \"$FILE_PATH\" =~ app/.* ]]; then echo \"📁 App Router file detected: $FILE_PATH\"; if [[ \"$FILE_PATH\" =~ page\\.(js|jsx|ts|tsx)$ ]] && ! grep -q \"export default function\" \"$FILE_PATH\" 2>/dev/null && ! grep -q \"export default async function\" \"$FILE_PATH\" 2>/dev/null; then echo \"❌ Page component must export default function\" >&2; ((ISSUES++)); fi; if [[ \"$FILE_PATH\" =~ layout\\.(js|jsx|ts|tsx)$ ]] && ! grep -q \"children\" \"$FILE_PATH\" 2>/dev/null; then echo \"❌ Layout component should accept children prop\" >&2; ((ISSUES++)); fi; if [[ \"$FILE_PATH\" =~ page\\.(js|jsx|ts|tsx)$ ]] && ! grep -q \"Metadata\" \"$FILE_PATH\" 2>/dev/null && ! grep -q \"metadata\" \"$FILE_PATH\" 2>/dev/null; then echo \"⚠️ Consider adding metadata export for SEO\"; fi; if grep -q \"use client\" \"$FILE_PATH\" 2>/dev/null; then echo \"🖥️ Client Component detected\"; if ! grep -E \"(useState|useEffect|onClick|onChange|onSubmit)\" \"$FILE_PATH\" 2>/dev/null; then echo \"⚠️ Client component without interactivity - consider Server Component\"; fi; else echo \"🚀 Server Component (default)\"; if grep -E \"(useState|useEffect|onClick|onChange|onSubmit)\" \"$FILE_PATH\" 2>/dev/null; then echo \"❌ Interactive features in Server Component - add \\\"use client\\\" directive\" >&2; ((ISSUES++)); fi; fi; fi; if [[ \"$FILE_PATH\" =~ \\.(jsx|tsx)$ ]]; then if ! grep -q \"import.*React\" \"$FILE_PATH\" 2>/dev/null && grep -q \"<\" \"$FILE_PATH\" 2>/dev/null; then echo \"⚠️ JSX without React import (Next.js 17+ handles this automatically)\"; fi; if ! grep -q \"FC\\|FunctionComponent\" \"$FILE_PATH\" 2>/dev/null && grep -q \"props\" \"$FILE_PATH\" 2>/dev/null && [[ \"$FILE_PATH\" =~ \\.tsx$ ]]; then echo \"💡 Consider using React.FC or explicit prop types for TypeScript\"; fi; fi; if [[ \"$FILE_PATH\" =~ \\.js$ ]] && [ -f \"tsconfig.json\" ]; then echo \"📝 JavaScript file in TypeScript project: $FILE_PATH\"; echo \"💡 Consider migrating to TypeScript for better type safety\"; fi; if grep -q \"next/image\" \"$FILE_PATH\" 2>/dev/null; then echo \"✅ Using next/image for optimized images\"; elif grep -q \"<img\" \"$FILE_PATH\" 2>/dev/null; then echo \"🖼️ Regular <img> tag detected\"; echo \"💡 Consider using next/image for better performance\"; fi; if grep -q \"next/link\" \"$FILE_PATH\" 2>/dev/null; then echo \"✅ Using next/link for navigation\"; elif grep -q \"<a href=\" \"$FILE_PATH\" 2>/dev/null && ! grep -q \"http\" \"$FILE_PATH\" 2>/dev/null; then echo \"🔗 Regular <a> tag for internal links detected\"; echo \"💡 Use next/link for internal navigation\"; fi; if grep -q \"getServerSideProps\\|getStaticProps\" \"$FILE_PATH\" 2>/dev/null; then echo \"⚠️ Pages Router data fetching methods detected\"; echo \"💡 Consider migrating to App Router with Server Components\"; fi; if grep -q \"className=.*{\" \"$FILE_PATH\" 2>/dev/null; then echo \"🎨 Dynamic className detected\"; if ! grep -q \"clsx\\|classnames\\|cn(\" \"$FILE_PATH\" 2>/dev/null; then echo \"💡 Consider using clsx or similar utility for className concatenation\"; fi; fi; if [ $ISSUES -eq 0 ]; then echo \"✅ Code quality check passed for $FILE_PATH\"; else echo \"❌ Found $ISSUES code quality issues in $FILE_PATH\" >&2; exit 2; fi; else echo \"❌ File $FILE_PATH not found\"; fi; else echo \"ℹ️ Code quality check skipped (not a JavaScript/TypeScript file or failed operation)\"; fi'",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

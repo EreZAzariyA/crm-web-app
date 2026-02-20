@@ -7,7 +7,7 @@ export function CrmLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset className="flex flex-col h-screen overflow-hidden">{children}</SidebarInset>
     </SidebarProvider>
   )
 }

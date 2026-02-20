@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   User,
   Bell,
@@ -14,6 +14,7 @@ import {
   MapPin,
 } from "lucide-react"
 import { useTheme } from "next-themes"
+import { toast } from "sonner"
 import { CrmHeader } from "@/components/crm-header"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -30,8 +31,55 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { updateProfile } from "@/lib/features/auth/authSlice"
 
 function ProfileTab() {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((s) => s.auth.user)
+
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    role: "",
+    location: "",
+    bio: "",
+  })
+
+  // Sync form with user data after mount (avoids hydration mismatch)
+  useEffect(() => {
+    if (user) {
+      setForm({
+        firstName: user.firstName ?? "",
+        lastName: user.lastName ?? "",
+        email: user.email ?? "",
+        phone: user.phone ?? "",
+        company: user.company ?? "",
+        role: user.role ?? "",
+        location: user.location ?? "",
+        bio: user.bio ?? "",
+      })
+    }
+  }, [user])
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  async function handleSave() {
+    const result = await dispatch(updateProfile(form))
+    if (updateProfile.fulfilled.match(result)) {
+      toast.success("Profile saved")
+    } else {
+      toast.error("Failed to save profile")
+    }
+  }
+
+  const initials = `${form.firstName?.[0] ?? ""}${form.lastName?.[0] ?? ""}`.toUpperCase() || "?"
+
   return (
     <div className="space-y-6">
       <div>
@@ -45,7 +93,7 @@ function ProfileTab() {
       <div className="flex items-center gap-4">
         <Avatar className="size-16">
           <AvatarFallback className="bg-primary/20 text-primary text-lg font-semibold">
-            JD
+            {initials}
           </AvatarFallback>
         </Avatar>
         <div className="space-y-1">
@@ -61,13 +109,13 @@ function ProfileTab() {
           <Label htmlFor="firstName" className="text-xs text-muted-foreground">
             First Name
           </Label>
-          <Input id="firstName" defaultValue="Jordan" className="bg-secondary" />
+          <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} className="bg-secondary" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="lastName" className="text-xs text-muted-foreground">
             Last Name
           </Label>
-          <Input id="lastName" defaultValue="Doe" className="bg-secondary" />
+          <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} className="bg-secondary" />
         </div>
       </div>
 
@@ -78,7 +126,7 @@ function ProfileTab() {
             Email Address
           </span>
         </Label>
-        <Input id="email" type="email" defaultValue="jordan@relay.io" className="bg-secondary" />
+        <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} className="bg-secondary" />
       </div>
 
       <div className="space-y-2">
@@ -88,7 +136,7 @@ function ProfileTab() {
             Phone Number
           </span>
         </Label>
-        <Input id="phone" type="tel" defaultValue="+1 (555) 123-4567" className="bg-secondary" />
+        <Input id="phone" name="phone" type="tel" value={form.phone} onChange={handleChange} className="bg-secondary" />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -99,13 +147,13 @@ function ProfileTab() {
               Company
             </span>
           </Label>
-          <Input id="company" defaultValue="Relay Inc." className="bg-secondary" />
+          <Input id="company" name="company" value={form.company} onChange={handleChange} className="bg-secondary" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="role" className="text-xs text-muted-foreground">
             Role
           </Label>
-          <Input id="role" defaultValue="Sales Manager" className="bg-secondary" />
+          <Input id="role" name="role" value={form.role} onChange={handleChange} className="bg-secondary" />
         </div>
       </div>
 
@@ -116,7 +164,7 @@ function ProfileTab() {
             Location
           </span>
         </Label>
-        <Input id="location" defaultValue="San Francisco, CA" className="bg-secondary" />
+        <Input id="location" name="location" value={form.location} onChange={handleChange} className="bg-secondary" />
       </div>
 
       <div className="space-y-2">
@@ -125,14 +173,16 @@ function ProfileTab() {
         </Label>
         <Textarea
           id="bio"
+          name="bio"
           placeholder="Tell us about yourself..."
           className="bg-secondary min-h-20 resize-none"
-          defaultValue="Sales Manager at Relay Inc. focused on enterprise client relationships."
+          value={form.bio}
+          onChange={handleChange}
         />
       </div>
 
       <div className="flex justify-end">
-        <Button size="sm" className="gap-1.5">
+        <Button size="sm" className="gap-1.5" onClick={handleSave}>
           <Save className="size-3.5" />
           Save Changes
         </Button>
@@ -142,12 +192,44 @@ function ProfileTab() {
 }
 
 function NotificationsTab() {
-  const [emailNotifs, setEmailNotifs] = useState(true)
-  const [pushNotifs, setPushNotifs] = useState(true)
-  const [dealUpdates, setDealUpdates] = useState(true)
-  const [contactUpdates, setContactUpdates] = useState(false)
-  const [weeklyReport, setWeeklyReport] = useState(true)
-  const [activityAlerts, setActivityAlerts] = useState(true)
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((s) => s.auth.user)
+
+  const [prefs, setPrefs] = useState({
+    email: true,
+    push: true,
+    dealUpdates: true,
+    contactUpdates: false,
+    activityAlerts: true,
+    weeklyReport: true,
+  })
+
+  // Sync with user preferences after mount (avoids hydration mismatch)
+  useEffect(() => {
+    if (user?.notifications) {
+      setPrefs({
+        email: user.notifications.email ?? true,
+        push: user.notifications.push ?? true,
+        dealUpdates: user.notifications.dealUpdates ?? true,
+        contactUpdates: user.notifications.contactUpdates ?? false,
+        activityAlerts: user.notifications.activityAlerts ?? true,
+        weeklyReport: user.notifications.weeklyReport ?? true,
+      })
+    }
+  }, [user])
+
+  function toggle(key: keyof typeof prefs) {
+    setPrefs((prev) => ({ ...prev, [key]: !prev[key] }))
+  }
+
+  async function handleSave() {
+    const result = await dispatch(updateProfile({ notifications: prefs }))
+    if (updateProfile.fulfilled.match(result)) {
+      toast.success("Notification preferences saved")
+    } else {
+      toast.error("Failed to save preferences")
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -167,14 +249,14 @@ function NotificationsTab() {
           <NotificationRow
             label="Email Notifications"
             description="Receive notifications via email"
-            checked={emailNotifs}
-            onCheckedChange={setEmailNotifs}
+            checked={prefs.email}
+            onCheckedChange={() => toggle("email")}
           />
           <NotificationRow
             label="Push Notifications"
             description="Receive push notifications in browser"
-            checked={pushNotifs}
-            onCheckedChange={setPushNotifs}
+            checked={prefs.push}
+            onCheckedChange={() => toggle("push")}
           />
         </div>
       </div>
@@ -189,20 +271,20 @@ function NotificationsTab() {
           <NotificationRow
             label="Deal Updates"
             description="When a deal status or stage changes"
-            checked={dealUpdates}
-            onCheckedChange={setDealUpdates}
+            checked={prefs.dealUpdates}
+            onCheckedChange={() => toggle("dealUpdates")}
           />
           <NotificationRow
             label="Contact Updates"
             description="When a contact is added or modified"
-            checked={contactUpdates}
-            onCheckedChange={setContactUpdates}
+            checked={prefs.contactUpdates}
+            onCheckedChange={() => toggle("contactUpdates")}
           />
           <NotificationRow
             label="Activity Alerts"
             description="When new activity is logged for your deals"
-            checked={activityAlerts}
-            onCheckedChange={setActivityAlerts}
+            checked={prefs.activityAlerts}
+            onCheckedChange={() => toggle("activityAlerts")}
           />
         </div>
       </div>
@@ -217,14 +299,14 @@ function NotificationsTab() {
           <NotificationRow
             label="Weekly Summary"
             description="Receive a weekly email with your CRM summary"
-            checked={weeklyReport}
-            onCheckedChange={setWeeklyReport}
+            checked={prefs.weeklyReport}
+            onCheckedChange={() => toggle("weeklyReport")}
           />
         </div>
       </div>
 
       <div className="flex justify-end">
-        <Button size="sm" className="gap-1.5">
+        <Button size="sm" className="gap-1.5" onClick={handleSave}>
           <Save className="size-3.5" />
           Save Preferences
         </Button>
@@ -256,7 +338,37 @@ function NotificationRow({
 }
 
 function AppearanceTab() {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((s) => s.auth.user)
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  const [appearance, setAppearance] = useState({
+    language: "en",
+    timezone: "pst",
+    dateFormat: "mdy",
+  })
+
+  // Sync with user preferences and mark mounted (avoids hydration mismatch)
+  useEffect(() => {
+    setMounted(true)
+    if (user?.appearance) {
+      setAppearance({
+        language: user.appearance.language ?? "en",
+        timezone: user.appearance.timezone ?? "pst",
+        dateFormat: user.appearance.dateFormat ?? "mdy",
+      })
+    }
+  }, [user])
+
+  async function handleSave() {
+    const result = await dispatch(updateProfile({ appearance }))
+    if (updateProfile.fulfilled.match(result)) {
+      toast.success("Appearance preferences saved")
+    } else {
+      toast.error("Failed to save preferences")
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -275,19 +387,19 @@ function AppearanceTab() {
         <div className="grid grid-cols-3 gap-3">
           <ThemeOption
             label="Light"
-            active={theme === "light"}
+            active={mounted && theme === "light"}
             onClick={() => setTheme("light")}
             preview="bg-white border-zinc-200"
           />
           <ThemeOption
             label="Dark"
-            active={theme === "dark"}
+            active={mounted && theme === "dark"}
             onClick={() => setTheme("dark")}
             preview="bg-zinc-900 border-zinc-700"
           />
           <ThemeOption
             label="System"
-            active={theme === "system"}
+            active={mounted && theme === "system"}
             onClick={() => setTheme("system")}
             preview="bg-gradient-to-r from-white to-zinc-900 border-zinc-400"
           />
@@ -308,7 +420,7 @@ function AppearanceTab() {
                 Language
               </span>
             </Label>
-            <Select defaultValue="en">
+            <Select value={appearance.language} onValueChange={(v) => setAppearance((p) => ({ ...p, language: v }))}>
               <SelectTrigger id="language" className="bg-secondary">
                 <SelectValue />
               </SelectTrigger>
@@ -325,7 +437,7 @@ function AppearanceTab() {
             <Label htmlFor="timezone" className="text-xs text-muted-foreground">
               Timezone
             </Label>
-            <Select defaultValue="pst">
+            <Select value={appearance.timezone} onValueChange={(v) => setAppearance((p) => ({ ...p, timezone: v }))}>
               <SelectTrigger id="timezone" className="bg-secondary">
                 <SelectValue />
               </SelectTrigger>
@@ -344,7 +456,7 @@ function AppearanceTab() {
           <Label htmlFor="dateFormat" className="text-xs text-muted-foreground">
             Date Format
           </Label>
-          <Select defaultValue="mdy">
+          <Select value={appearance.dateFormat} onValueChange={(v) => setAppearance((p) => ({ ...p, dateFormat: v }))}>
             <SelectTrigger id="dateFormat" className="bg-secondary">
               <SelectValue />
             </SelectTrigger>
@@ -358,7 +470,7 @@ function AppearanceTab() {
       </div>
 
       <div className="flex justify-end">
-        <Button size="sm" className="gap-1.5">
+        <Button size="sm" className="gap-1.5" onClick={handleSave}>
           <Save className="size-3.5" />
           Save Preferences
         </Button>
@@ -401,6 +513,29 @@ function ThemeOption({
 }
 
 function AccountTab() {
+  const dispatch = useAppDispatch()
+  const [pwForm, setPwForm] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" })
+
+  function handlePwChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPwForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  async function handlePasswordUpdate() {
+    if (pwForm.newPassword !== pwForm.confirmPassword) {
+      toast.error("New passwords do not match")
+      return
+    }
+    const result = await dispatch(
+      updateProfile({ currentPassword: pwForm.currentPassword, newPassword: pwForm.newPassword })
+    )
+    if (updateProfile.fulfilled.match(result)) {
+      toast.success("Password updated")
+      setPwForm({ currentPassword: "", newPassword: "", confirmPassword: "" })
+    } else {
+      toast.error((result.payload as string) || "Failed to update password")
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -420,24 +555,24 @@ function AccountTab() {
             <Label htmlFor="currentPassword" className="text-xs text-muted-foreground">
               Current Password
             </Label>
-            <Input id="currentPassword" type="password" className="bg-secondary" />
+            <Input id="currentPassword" name="currentPassword" type="password" value={pwForm.currentPassword} onChange={handlePwChange} className="bg-secondary" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="newPassword" className="text-xs text-muted-foreground">
                 New Password
               </Label>
-              <Input id="newPassword" type="password" className="bg-secondary" />
+              <Input id="newPassword" name="newPassword" type="password" value={pwForm.newPassword} onChange={handlePwChange} className="bg-secondary" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="confirmPassword" className="text-xs text-muted-foreground">
                 Confirm New Password
               </Label>
-              <Input id="confirmPassword" type="password" className="bg-secondary" />
+              <Input id="confirmPassword" name="confirmPassword" type="password" value={pwForm.confirmPassword} onChange={handlePwChange} className="bg-secondary" />
             </div>
           </div>
           <div className="flex justify-end">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={handlePasswordUpdate}>
               Update Password
             </Button>
           </div>
@@ -455,7 +590,7 @@ function AccountTab() {
             <div className="space-y-0.5">
               <span className="text-sm font-medium text-foreground">Current Session</span>
               <p className="text-xs text-muted-foreground">
-                Chrome on macOS - San Francisco, CA
+                Active session
               </p>
             </div>
             <span className="text-xs font-medium text-primary">Active</span>

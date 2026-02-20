@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { CrmService, type Deal } from '@/lib/crm-service'
 
 interface DealsState {
@@ -13,10 +13,24 @@ const initialState: DealsState = {
   error: null,
 }
 
-// Thunks
 export const fetchDeals = createAsyncThunk('deals/fetchDeals', async () => {
-  const response = await CrmService.getDeals()
-  return response
+  return CrmService.getDeals()
+})
+
+export const addDeal = createAsyncThunk('deals/addDeal', async (newDeal: Omit<Deal, 'id'>) => {
+  return CrmService.createDeal(newDeal)
+})
+
+export const updateDeal = createAsyncThunk(
+  'deals/updateDeal',
+  async ({ id, updates }: { id: string; updates: Partial<Deal> }) => {
+    return CrmService.updateDeal(id, updates)
+  }
+)
+
+export const deleteDeal = createAsyncThunk('deals/deleteDeal', async (id: string) => {
+  await CrmService.deleteDeal(id)
+  return id
 })
 
 const dealsSlice = createSlice({
@@ -35,6 +49,16 @@ const dealsSlice = createSlice({
       .addCase(fetchDeals.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message || 'Failed to fetch deals'
+      })
+      .addCase(addDeal.fulfilled, (state, action) => {
+        state.items.unshift(action.payload)
+      })
+      .addCase(updateDeal.fulfilled, (state, action) => {
+        const idx = state.items.findIndex((d) => d.id === action.payload.id)
+        if (idx !== -1) state.items[idx] = action.payload
+      })
+      .addCase(deleteDeal.fulfilled, (state, action) => {
+        state.items = state.items.filter((d) => d.id !== action.payload)
       })
   },
 })

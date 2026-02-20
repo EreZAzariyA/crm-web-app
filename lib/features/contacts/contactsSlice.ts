@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { CrmService, type Contact } from '@/lib/crm-service'
 
 interface ContactsState {
@@ -13,15 +13,27 @@ const initialState: ContactsState = {
   error: null,
 }
 
-// Thunks
 export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async () => {
-  const response = await CrmService.getContacts()
-  return response
+  return CrmService.getContacts()
 })
 
-export const addContact = createAsyncThunk('contacts/addContact', async (newContact: Omit<Contact, "id" | "lastActivity" | "avatar">) => {
-  const response = await CrmService.createContact(newContact)
-  return response
+export const addContact = createAsyncThunk(
+  'contacts/addContact',
+  async (newContact: Omit<Contact, 'id' | 'lastActivity' | 'avatar'>) => {
+    return CrmService.createContact(newContact)
+  }
+)
+
+export const updateContact = createAsyncThunk(
+  'contacts/updateContact',
+  async ({ id, updates }: { id: string; updates: Partial<Contact> }) => {
+    return CrmService.updateContact(id, updates)
+  }
+)
+
+export const deleteContact = createAsyncThunk('contacts/deleteContact', async (id: string) => {
+  await CrmService.deleteContact(id)
+  return id
 })
 
 const contactsSlice = createSlice({
@@ -42,7 +54,14 @@ const contactsSlice = createSlice({
         state.error = action.error.message || 'Failed to fetch contacts'
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push(action.payload)
+        state.items.unshift(action.payload)
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        const idx = state.items.findIndex((c) => c.id === action.payload.id)
+        if (idx !== -1) state.items[idx] = action.payload
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.items = state.items.filter((c) => c.id !== action.payload)
       })
   },
 })
