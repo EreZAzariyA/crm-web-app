@@ -1261,7 +1261,7 @@ export function DealsContent() {
                       <p className="text-xs text-muted-foreground mb-1">{t("view.amount")}</p>
                       <p className="text-2xl font-bold text-foreground">${viewDeal.value.toLocaleString()}</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-end">
                       <p className="text-xs text-muted-foreground mb-1">{t("view.probability")}</p>
                       <p className="text-2xl font-bold text-foreground">{viewDeal.probability}%</p>
                     </div>
@@ -1337,7 +1337,7 @@ export function DealsContent() {
             ) : (
               validNextStages.map((s) => (
                 <button key={s.key} onClick={() => setMoveStageTarget(s.key as Stage)}
-                  className={`w-full flex items-center gap-3 rounded-lg border p-3 text-left transition-colors ${moveStageTarget === s.key ? "border-primary bg-primary/10" : "border-border hover:bg-secondary/40"}`}>
+                  className={`w-full flex items-center gap-3 rounded-lg border p-3 text-start transition-colors ${moveStageTarget === s.key ? "border-primary bg-primary/10" : "border-border hover:bg-secondary/40"}`}>
                   <div className={`size-2.5 rounded-full ${s.dotColor}`} />
                   <div className="flex-1">
                     <span className="text-sm font-medium">{s.label}</span>

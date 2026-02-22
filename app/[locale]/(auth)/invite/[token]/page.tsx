@@ -209,7 +209,7 @@ export default function InvitePage({ params }: { params: Promise<{ token: string
           </div>
 
           <Button type="submit" className="w-full" disabled={status === 'submitting'}>
-            {status === 'submitting' && <Loader2 className="mr-2 size-4 animate-spin" />}
+            {status === 'submitting' && <Loader2 className="me-2 size-4 animate-spin" />}
             {t('createAccount')}
           </Button>
         </form>

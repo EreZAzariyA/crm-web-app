@@ -288,7 +288,7 @@ export function UnderwritingContent() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* ── Left panel ── */}
-        <div className="w-80 shrink-0 border-r border-border overflow-y-auto p-3 space-y-1">
+        <div className="w-80 shrink-0 border-e border-border overflow-y-auto p-3 space-y-1">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground px-2 mb-2">
             {t("pendingReview", {count: uwDeals.length})}
           </p>

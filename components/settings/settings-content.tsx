@@ -33,7 +33,7 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { updateProfile } from "@/lib/features/auth/authSlice"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 
 function ProfileTab() {
   const t = useTranslations("Settings.profile")
@@ -652,11 +652,14 @@ function AccountTab() {
 
 export function SettingsContent() {
   const t = useTranslations("Settings")
+  const locale = useLocale()
+  const isHe = locale === "he"
+
   return (
     <>
       <CrmHeader title={t("title")} description={t("description")} />
       <div className="flex-1 overflow-auto p-4 lg:p-6">
-        <Tabs defaultValue="profile" className="space-y-6">
+        <Tabs defaultValue="profile" className="space-y-6" dir={isHe ? "rtl" : "ltr"}>
           <TabsList className="bg-secondary">
             <TabsTrigger value="profile" className="gap-1.5 text-xs">
               <User className="size-3.5" />

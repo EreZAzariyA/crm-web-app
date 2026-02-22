@@ -133,6 +133,16 @@
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
+  /* RTL: Flip Recharts for right-to-left locales */
+  [dir="rtl"] .recharts-wrapper {
+    direction: ltr;
+  }
+
+  /* RTL: Ensure dialogs / popovers inherit direction */
+  [dir="rtl"] [data-radix-popper-content-wrapper] {
+    direction: rtl;
+  }
+
   /* Hide the horizontal scrollbar that appears inside the sidebar */
   [data-sidebar="sidebar"],
   [data-sidebar="content"] {
