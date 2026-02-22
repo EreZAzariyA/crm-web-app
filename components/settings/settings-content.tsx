@@ -652,6 +652,14 @@ function AccountTab() {
 
 export function SettingsContent() {
   const t = useTranslations("Settings")
+
+  useEffect(() => {
+    const html = document.documentElement
+    console.log("[v0] html dir:", html.getAttribute("dir"))
+    console.log("[v0] html lang:", html.getAttribute("lang"))
+    console.log("[v0] computed direction:", getComputedStyle(html).direction)
+  }, [])
+
   return (
     <>
       <CrmHeader title={t("title")} description={t("description")} />
