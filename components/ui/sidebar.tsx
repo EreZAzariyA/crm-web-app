@@ -229,10 +229,10 @@ function Sidebar({
       <div
         data-slot="sidebar-container"
         className={cn(
-          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
+          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-linear md:flex',
           side === 'left'
-            ? 'start-0 group-data-[collapsible=offcanvas]:-start-[var(--sidebar-width)]'
-            : 'end-0 group-data-[collapsible=offcanvas]:-end-[var(--sidebar-width)]',
+            ? '[inset-inline-start:0] group-data-[collapsible=offcanvas]:[inset-inline-start:calc(var(--sidebar-width)*-1)]'
+            : '[inset-inline-end:0] group-data-[collapsible=offcanvas]:[inset-inline-end:calc(var(--sidebar-width)*-1)]',
           // Adjust the padding for floating and inset variants.
           variant === 'floating' || variant === 'inset'
             ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'
