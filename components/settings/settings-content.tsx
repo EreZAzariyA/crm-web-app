@@ -656,7 +656,7 @@ export function SettingsContent() {
     <>
       <CrmHeader title={t("title")} description={t("description")} />
       <div className="flex-1 overflow-auto p-4 lg:p-6">
-        <Tabs defaultValue="profile" className="space-y-6">
+        <Tabs defaultValue="profile" className="mx-auto max-w-4xl space-y-6">
           <TabsList className="bg-secondary">
             <TabsTrigger value="profile" className="gap-1.5 text-xs">
               <User className="size-3.5" />
