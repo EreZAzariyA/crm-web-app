@@ -15,7 +15,7 @@ import {
 } from "lucide-react"
 import {Link, usePathname, useRouter} from "@/i18n/routing"
 import { useEffect, useState } from "react"
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
@@ -87,11 +87,10 @@ export function AppSidebar() {
   // Only show Admin nav item after hydration to avoid hydration mismatch
   const isAdmin = mounted && user?.systemRole === "admin"
 
-  const isHe = useLocale() === "he"
   const sidebarBtnClass = "h-9 gap-3 rounded-md px-3 text-sm font-medium text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold"
 
   return (
-    <Sidebar side={isHe ? "right" : "left"} collapsible="icon" className="border-e border-sidebar-border">
+    <Sidebar side="left" collapsible="icon" className="border-e border-sidebar-border">
       {/* ── Logo / Brand ── */}
       <SidebarHeader className="h-14 justify-center border-b border-sidebar-border px-4">
         <div className="flex items-center gap-3">
@@ -193,7 +192,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      {/* ���─ User footer ── */}
+      {/* �����─ User footer ── */}
       <SidebarFooter className="border-t border-sidebar-border p-3">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
