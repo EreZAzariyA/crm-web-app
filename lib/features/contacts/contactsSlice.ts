@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { CrmService, type Contact } from '@/lib/crm-service'
-import { logoutUser, loginUser } from '@/lib/features/auth/authSlice'
+import { logoutUser, loginUser, registerUser, fetchCurrentUser } from '@/lib/features/auth/authSlice'
 
 interface ContactsState {
   items: Contact[]
@@ -64,9 +64,11 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.items = state.items.filter((c) => c.id !== action.payload)
       })
-      // Reset data when the user logs out or logs in as a different user
+      // Reset data when the user session is initialized or changed
       .addCase(logoutUser.fulfilled, () => initialState)
       .addCase(loginUser.fulfilled, () => initialState)
+      .addCase(registerUser.fulfilled, () => initialState)
+      .addCase(fetchCurrentUser.fulfilled, () => initialState)
   },
 })
 
