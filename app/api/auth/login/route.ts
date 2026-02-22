@@ -77,6 +77,7 @@ export async function POST(req: NextRequest) {
         path: '/',
       })
 
+      console.log("[v0] Master user login successful, token created")
       return res
     }
 
@@ -128,7 +129,9 @@ export async function POST(req: NextRequest) {
     })
 
     return res
-  } catch {
+  } catch (error) {
+    console.error("[v0] Login error:", error instanceof Error ? error.message : String(error))
+    console.error("[v0] Full error:", error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
