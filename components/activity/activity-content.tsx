@@ -379,7 +379,7 @@ export function ActivityContent() {
                     locale={locale === 'he' ? he : enUS}
                     modifiers={{ hasActivity: activityDays }}
                     modifiersClassNames={{
-                      hasActivity: "after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:size-1 after:rounded-full after:bg-primary relative"
+                      hasActivity: "after:absolute after:bottom-1 after:start-1/2 after:-translate-x-1/2 after:size-1 after:rounded-full after:bg-primary relative"
                     }}
                   />
                 </CardContent>

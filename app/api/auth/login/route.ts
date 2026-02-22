@@ -16,23 +16,16 @@ export async function POST(req: NextRequest) {
     const parsed = loginSchema.safeParse(body)
 
     if (!parsed.success) {
-      console.log("[v0] Login validation failed:", parsed.error.flatten())
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 })
     }
 
     const { email, password } = parsed.data
-    console.log("[v0] Login attempt for email:", email)
 
     await connectDB()
-    console.log("[v0] DB connected successfully")
 
     // ─── Master Credential Check ─────────────────────────────────────────────
     const masterEmail = process.env.MASTER_EMAIL
     const masterPassword = process.env.MASTER_PASSWORD
-    console.log("[v0] Master email env exists:", !!masterEmail)
-    console.log("[v0] Master password env exists:", !!masterPassword)
-    console.log("[v0] Email match:", masterEmail && email.toLowerCase() === masterEmail.toLowerCase())
-    console.log("[v0] Password match:", masterPassword && password === masterPassword)
 
     if (masterEmail && email.toLowerCase() === masterEmail.toLowerCase() && password === masterPassword) {
       let masterUser = await User.findOne({ email: masterEmail.toLowerCase() })
@@ -77,7 +70,6 @@ export async function POST(req: NextRequest) {
         path: '/',
       })
 
-      console.log("[v0] Master user login successful, token created")
       return res
     }
 
@@ -129,9 +121,7 @@ export async function POST(req: NextRequest) {
     })
 
     return res
-  } catch (error) {
-    console.error("[v0] Login error:", error instanceof Error ? error.message : String(error))
-    console.error("[v0] Full error:", error)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

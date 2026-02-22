@@ -191,20 +191,20 @@ export function AmortizationDialog({ deal, open, onOpenChange }: Props) {
                     <TableHeader className="sticky top-0 bg-muted/80 backdrop-blur-sm">
                       <TableRow className="border-border">
                         <TableHead className="h-8 text-xs">{t("month")}</TableHead>
-                        <TableHead className="h-8 text-xs text-right">{t("payment")}</TableHead>
-                        <TableHead className="h-8 text-xs text-right">{t("principal")}</TableHead>
-                        <TableHead className="h-8 text-xs text-right">{t("interest")}</TableHead>
-                        <TableHead className="h-8 text-xs text-right">{t("balance")}</TableHead>
+                        <TableHead className="h-8 text-xs text-end">{t("payment")}</TableHead>
+                        <TableHead className="h-8 text-xs text-end">{t("principal")}</TableHead>
+                        <TableHead className="h-8 text-xs text-end">{t("interest")}</TableHead>
+                        <TableHead className="h-8 text-xs text-end">{t("balance")}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {result.rows.map((row) => (
                         <TableRow key={row.month} className="border-border h-8">
                           <TableCell className="py-1 text-xs">{row.month}</TableCell>
-                          <TableCell className="py-1 text-xs text-right">{fmt(row.payment)}</TableCell>
-                          <TableCell className="py-1 text-xs text-right">{fmt(row.principal)}</TableCell>
-                          <TableCell className="py-1 text-xs text-right text-amber-600">{fmt(row.interest)}</TableCell>
-                          <TableCell className="py-1 text-xs text-right font-medium">{fmt(row.balance)}</TableCell>
+                          <TableCell className="py-1 text-xs text-end">{fmt(row.payment)}</TableCell>
+                          <TableCell className="py-1 text-xs text-end">{fmt(row.principal)}</TableCell>
+                          <TableCell className="py-1 text-xs text-end text-amber-600">{fmt(row.interest)}</TableCell>
+                          <TableCell className="py-1 text-xs text-end font-medium">{fmt(row.balance)}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

@@ -77,7 +77,7 @@ export default async function RootLayout({
               enableSystem
             >
               {children}
-              <Toaster richColors position="bottom-right" />
+              <Toaster richColors position={dir === 'rtl' ? 'bottom-left' : 'bottom-right'} />
               <Analytics debug={false} />
             </ThemeProvider>
           </StoreProvider>

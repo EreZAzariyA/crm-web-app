@@ -407,18 +407,18 @@ function UsersTab({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48">
                       <DropdownMenuLabel className="text-xs text-muted-foreground">{t("table.changeRole")}</DropdownMenuLabel>
-                      <DropdownMenuItem onClick={() => onRoleChange(u.id, "admin")}   disabled={u.systemRole === "admin"}   className="text-sm"><ShieldCheck className="mr-2 size-3.5 text-destructive" />{tr("makeAdmin")}</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => onRoleChange(u.id, "manager")} disabled={u.systemRole === "manager"} className="text-sm"><UserCheck className="mr-2 size-3.5 text-warning" />{tr("makeManager")}</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => onRoleChange(u.id, "user")}    disabled={u.systemRole === "user"}    className="text-sm"><Users className="mr-2 size-3.5 text-primary" />{tr("makeUser")}</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => onRoleChange(u.id, "admin")}   disabled={u.systemRole === "admin"}   className="text-sm"><ShieldCheck className="me-2 size-3.5 text-destructive" />{tr("makeAdmin")}</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => onRoleChange(u.id, "manager")} disabled={u.systemRole === "manager"} className="text-sm"><UserCheck className="me-2 size-3.5 text-warning" />{tr("makeManager")}</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => onRoleChange(u.id, "user")}    disabled={u.systemRole === "user"}    className="text-sm"><Users className="me-2 size-3.5 text-primary" />{tr("makeUser")}</DropdownMenuItem>
                       
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={() => { setSelectedTeamId(u.teamId || "none"); setAssignUser(u) }} className="text-sm">
-                        <UserPlus className="mr-2 size-3.5" />{t("table.assignTeam")}
+                        <UserPlus className="me-2 size-3.5" />{t("table.assignTeam")}
                       </DropdownMenuItem>
 
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={() => onToggleActive(u.id, u.isActive)} className={`text-sm ${u.isActive ? "text-destructive focus:text-destructive" : ""}`}>
-                        {u.isActive ? <><UserX className="mr-2 size-3.5" />{tr("deactivate")}</> : <><UserCheck className="mr-2 size-3.5" />{tr("activate")}</>}
+                        {u.isActive ? <><UserX className="me-2 size-3.5" />{tr("deactivate")}</> : <><UserCheck className="me-2 size-3.5" />{tr("activate")}</>}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -454,7 +454,7 @@ function UsersTab({
           <DialogFooter>
             <Button variant="outline" onClick={() => setAssignUser(null)} disabled={assigning}>{common("cancel")}</Button>
             <Button onClick={submitAssignTeam} disabled={assigning}>
-              {assigning && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {assigning && <Loader2 className="me-2 size-4 animate-spin" />}
               {common("save")}
             </Button>
           </DialogFooter>
@@ -671,21 +671,21 @@ function TeamsTab({
                               onClick={() => onSetMemberRole(team.id, m.userId, "lead")}
                               className="text-xs"
                             >
-                              <Crown className="mr-2 size-3 text-warning" />{t("dialogs.teamLead")}
+                              <Crown className="me-2 size-3 text-warning" />{t("dialogs.teamLead")}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               disabled={m.role === "member"}
                               onClick={() => onSetMemberRole(team.id, m.userId, "member")}
                               className="text-xs"
                             >
-                              <UserCheck className="mr-2 size-3" />{t("dialogs.member")}
+                              <UserCheck className="me-2 size-3" />{t("dialogs.member")}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                               className="text-xs text-destructive focus:text-destructive"
                               onClick={() => onRemoveMember(team.id, m.userId)}
                             >
-                              <UserX className="mr-2 size-3" />{common("delete")}
+                              <UserX className="me-2 size-3" />{common("delete")}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -729,7 +729,7 @@ function TeamsTab({
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateOpen(false)} disabled={saving}>{common("cancel")}</Button>
             <Button onClick={submitCreate} disabled={saving}>
-              {saving && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {saving && <Loader2 className="me-2 size-4 animate-spin" />}
               {t("create")}
             </Button>
           </DialogFooter>
@@ -755,7 +755,7 @@ function TeamsTab({
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditTeam(null)} disabled={saving}>{common("cancel")}</Button>
             <Button onClick={submitEdit} disabled={saving}>
-              {saving && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {saving && <Loader2 className="me-2 size-4 animate-spin" />}
               {common("save")}
             </Button>
           </DialogFooter>
@@ -774,7 +774,7 @@ function TeamsTab({
           <AlertDialogFooter>
             <AlertDialogCancel disabled={deleting}>{common("cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={submitDelete} disabled={deleting} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              {deleting && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {deleting && <Loader2 className="me-2 size-4 animate-spin" />}
               {common("delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -822,7 +822,7 @@ function TeamsTab({
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddMemberTeam(null)} disabled={saving}>{common("cancel")}</Button>
             <Button onClick={submitAddMember} disabled={saving || !selectedUserId}>
-              {saving && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {saving && <Loader2 className="me-2 size-4 animate-spin" />}
               {t("addMember")}
             </Button>
           </DialogFooter>
@@ -1156,7 +1156,7 @@ export function AdminContent() {
               <DialogFooter>
                 <Button variant="outline" onClick={() => setInviteOpen(false)} disabled={inviting}>{common("cancel")}</Button>
                 <Button onClick={handleInvite} disabled={inviting}>
-                  {inviting && <Loader2 className="mr-2 size-4 animate-spin" />}
+                  {inviting && <Loader2 className="me-2 size-4 animate-spin" />}
                   {t("users.generateInvite")}
                 </Button>
               </DialogFooter>

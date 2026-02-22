@@ -378,7 +378,7 @@ export function ContactDetailContent({ contactId }: { contactId: string }) {
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditOpen(false)} disabled={saving}>{common("cancel")}</Button>
             <Button onClick={handleEdit} disabled={saving}>
-              {saving && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {saving && <Loader2 className="me-2 size-4 animate-spin" />}
               {common("save")}
             </Button>
           </DialogFooter>
@@ -400,7 +400,7 @@ export function ContactDetailContent({ contactId }: { contactId: string }) {
               onClick={handleDelete} disabled={deleting}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {deleting && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {deleting && <Loader2 className="me-2 size-4 animate-spin" />}
               {common("delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
