@@ -15,6 +15,7 @@ import { CompanyOverviewTab } from "./company-overview-tab"
 import { CompanyLoansTable } from "./company-loans-table"
 import { CompanyContactsTable } from "./company-contacts-table"
 import { CompanyHealthTab } from "./company-health-tab"
+import { CompanyFinancialReportsTab } from "./company-financial-reports-tab"
 
 interface CompanyProfileContentProps {
   companyName: string
@@ -96,6 +97,7 @@ export function CompanyProfileContent({ companyName }: CompanyProfileContentProp
               <TabsTrigger value="loans">{t("tabs.loans")}</TabsTrigger>
               <TabsTrigger value="contacts">{t("tabs.contacts")}</TabsTrigger>
               <TabsTrigger value="health">{t("tabs.financialHealth")}</TabsTrigger>
+              <TabsTrigger value="reports">{t("tabs.financialReports")}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview">
@@ -112,6 +114,10 @@ export function CompanyProfileContent({ companyName }: CompanyProfileContentProp
 
             <TabsContent value="health">
               <CompanyHealthTab deals={companyDeals} />
+            </TabsContent>
+
+            <TabsContent value="reports">
+              <CompanyFinancialReportsTab companyName={companyName} />
             </TabsContent>
           </Tabs>
         </div>

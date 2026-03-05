@@ -853,7 +853,8 @@
       "overview": "סקירה",
       "loans": "הלוואות",
       "contacts": "אנשי קשר",
-      "financialHealth": "בריאות פיננסית"
+      "financialHealth": "בריאות פיננסית",
+      "financialReports": "דוחות כספיים"
     },
     "overview": {
       "activeLoans": "הלוואות פעילות",
@@ -881,6 +882,33 @@
       "riskDistribution": "התפלגות סיכונים",
       "fundingHistory": "היסטוריית מימון",
       "noHistory": "אין היסטוריית מימון זמינה"
+    },
+    "financialReports": {
+      "dropzone": "גרור ושחרר קובץ CSV או Excel כאן",
+      "dropzoneSub": "תומך ב-.csv, .xls, .xlsx (עד 10MB)",
+      "browse": "בחר קבצים",
+      "processing": "מנתח נתונים פיננסיים עם AI...",
+      "noReports": "לא הועלו דוחות כספיים עדיין",
+      "uploadSuccess": "הדוח הועלה בהצלחה",
+      "uploadFailed": "העלאת הדוח נכשלה",
+      "analysisComplete": "ניתוח AI הושלם",
+      "analysisFailed": "ניתוח AI נכשל",
+      "fetchError": "נכשל בטעינת דוחות",
+      "invalidFileType": "סוג קובץ לא חוקי. אנא העלה קובץ CSV או Excel.",
+      "fileTooLarge": "הקובץ גדול מדי. גודל מקסימלי 10MB.",
+      "statusProcessing": "מעבד",
+      "statusFailed": "נכשל",
+      "unknownError": "שגיאה לא ידועה אירעה במהלך הניתוח",
+      "totalRevenue": "סה\"כ הכנסות",
+      "totalExpenses": "סה\"כ הוצאות",
+      "netCashFlow": "תזרים מזומנים נטו",
+      "debtRatio": "יחס חוב",
+      "profitability": "רווחיות",
+      "scoringMetrics": "מדדי דירוג",
+      "metricName": "מדד",
+      "metricValue": "ערך",
+      "metricImpact": "השפעה",
+      "expenseBreakdown": "פירוט הוצאות"
     }
   }
 }

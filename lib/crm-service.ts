@@ -75,6 +75,44 @@ export type DocumentRecord = {
   errorMessage:  string | null
 }
 
+export type FinancialReportRecord = {
+  id: string
+  companyName: string
+  originalName: string
+  transactions: Array<{
+    date: string
+    category: string
+    type: 'income' | 'expense'
+    description: string
+    amount: number
+    currency: string
+  }>
+  summary: {
+    totalRevenue: number
+    totalExpenses: number
+    netCashFlow: number
+    debtRatio: number
+    profitabilityRatio: number
+    expenseBreakdown: Array<{
+      category: string
+      amount: number
+      percentage: number
+    }>
+  } | null
+  creditScore: number | null
+  creditRating: string | null
+  scoreExplanation: string | null
+  metrics: Array<{
+    name: string
+    value: string
+    impact: 'positive' | 'neutral' | 'negative'
+  }>
+  status: 'processing' | 'done' | 'failed'
+  errorMessage: string | null
+  createdAt: string
+  updatedAt: string
+}
+
 export const CrmService = {
   getContacts: () => apiClient.get<Contact[]>('/contacts'),
   getDeals: () => apiClient.get<Deal[]>('/deals'),
@@ -118,4 +156,14 @@ export const CrmService = {
 
   deleteActivity: (id: string) =>
     apiClient.delete<{ success: boolean }>(`/activities/${id}`),
+
+  // Financial Reports (company-level)
+  getFinancialReports: (companyName: string) =>
+    apiClient.get<FinancialReportRecord[]>(`/companies/${encodeURIComponent(companyName)}/financial-reports`),
+
+  uploadFinancialReport: (companyName: string, file: File) => {
+    const fd = new FormData()
+    fd.append('file', file)
+    return apiClient.upload<FinancialReportRecord>(`/companies/${encodeURIComponent(companyName)}/financial-reports`, fd)
+  },
 }

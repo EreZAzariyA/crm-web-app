@@ -853,7 +853,8 @@
       "overview": "Overview",
       "loans": "Loans",
       "contacts": "Contacts",
-      "financialHealth": "Financial Health"
+      "financialHealth": "Financial Health",
+      "financialReports": "Financial Reports"
     },
     "overview": {
       "activeLoans": "Active Loans",
@@ -881,6 +882,33 @@
       "riskDistribution": "Risk Distribution",
       "fundingHistory": "Funding History",
       "noHistory": "No funding history available"
+    },
+    "financialReports": {
+      "dropzone": "Drag and drop a CSV or Excel file here",
+      "dropzoneSub": "Supports .csv, .xls, .xlsx (max 10MB)",
+      "browse": "Browse Files",
+      "processing": "Analyzing financial data with AI...",
+      "noReports": "No financial reports uploaded yet",
+      "uploadSuccess": "Report uploaded successfully",
+      "uploadFailed": "Failed to upload report",
+      "analysisComplete": "AI analysis completed",
+      "analysisFailed": "AI analysis failed",
+      "fetchError": "Failed to load reports",
+      "invalidFileType": "Invalid file type. Please upload a CSV or Excel file.",
+      "fileTooLarge": "File is too large. Maximum size is 10MB.",
+      "statusProcessing": "Processing",
+      "statusFailed": "Failed",
+      "unknownError": "An unknown error occurred during analysis",
+      "totalRevenue": "Total Revenue",
+      "totalExpenses": "Total Expenses",
+      "netCashFlow": "Net Cash Flow",
+      "debtRatio": "Debt Ratio",
+      "profitability": "Profitability",
+      "scoringMetrics": "Scoring Metrics",
+      "metricName": "Metric",
+      "metricValue": "Value",
+      "metricImpact": "Impact",
+      "expenseBreakdown": "Expense Breakdown"
     }
   }
 }
