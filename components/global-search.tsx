@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import {
   LayoutDashboard, Users, Kanban, Activity,
   Settings, ShieldCheck, User, ChevronRight,
-  Building2, Phone,
+  Building2, Phone, Calculator,
 } from "lucide-react"
 import {
   CommandDialog, CommandInput, CommandList, CommandEmpty,
@@ -58,8 +58,10 @@ export function GlobalSearch() {
     { id: "dashboard", label: ts("dashboard"),  href: "/",         icon: LayoutDashboard },
     { id: "contacts",  label: ts("contacts"),   href: "/contacts", icon: Users },
     { id: "loans",     label: ts("loans"),      href: "/deals",    icon: Kanban },
-    { id: "activity",  label: ts("activity"),   href: "/activity", icon: Activity },
-    { id: "settings",  label: ts("settings"),   href: "/settings", icon: Settings },
+{ id: "activity",  label: ts("activity"),   href: "/activity",   icon: Activity },
+  { id: "simulation", label: ts("simulation"), href: "/simulation", icon: Calculator },
+  { id: "companies", label: ts("companies"),   href: "/companies",  icon: Building2 },
+  { id: "settings",  label: ts("settings"),   href: "/settings",   icon: Settings },
   ]
 
   // ── Open shortcuts ──

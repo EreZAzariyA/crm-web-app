@@ -8,6 +8,8 @@
     "activity": "Activity",
     "underwriting": "Underwriting",
     "analytics": "Analytics",
+    "simulation": "Simulation",
+    "companies": "Companies",
     "admin": "Admin",
     "settings": "Settings",
     "profile": "Profile",
@@ -76,6 +78,50 @@
       "collectionRate": "Collection Rate",
       "avgCreditScore": "Avg Credit Score",
       "wtdAvgRate": "Wtd. Avg Rate"
+    },
+    "timeFilter": {
+      "7d": "7 Days",
+      "30d": "30 Days",
+      "90d": "90 Days",
+      "12m": "12 Months",
+      "all": "All Time"
+    },
+    "financial": {
+      "totalAssets": "Total Assets",
+      "totalLiabilities": "Total Liabilities",
+      "netPortfolioValue": "Net Portfolio Value",
+      "monthlyCashFlow": "Monthly Cash Flow",
+      "activeLoansCount": "{count} active loans",
+      "troubleLoansCount": "{count} in collection/default",
+      "assetsMinusLiabilities": "Assets minus liabilities",
+      "estimatedFromActive": "Estimated from active loans"
+    },
+    "creditGauge": {
+      "title": "Portfolio Credit Score",
+      "scoredLoans": "{count} scored loans",
+      "noData": "No credit score data available",
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor"
+    },
+    "alerts": {
+      "title": "Risk Alerts",
+      "noAlerts": "No risk alerts - portfolio looks healthy",
+      "ratingD": "{title} has a High Risk (D) rating",
+      "highDti": "{title} has DTI of {dti}% (above 43% threshold)",
+      "troubleStage": "{title} is in {stage} stage",
+      "missingData": "{title} is missing credit score and LTV data"
+    },
+    "heatmap": {
+      "title": "Disbursement vs. Repayment Heatmap",
+      "last12Months": "Last 12 months",
+      "disbursed": "Disbursed",
+      "repaid": "Repaid",
+      "loans": "loans",
+      "noData": "No date data available for heatmap",
+      "less": "Less",
+      "more": "More"
     }
   },
   "Stages": {
@@ -770,6 +816,71 @@
         "exportCSV": "Export CSV",
         "noData": "Set an interest rate and loan term to generate the schedule."
       }
+    }
+  },
+  "Simulation": {
+    "title": "Financing Simulation",
+    "description": "Compare financing scenarios side by side",
+    "addScenario": "Add Scenario",
+    "removeScenario": "Remove",
+    "scenario": "Scenario {letter}",
+    "loanAmount": "Loan Amount ($)",
+    "interestRate": "Annual Interest Rate (%)",
+    "loanTerm": "Loan Term (months)",
+    "originationFee": "Origination Fee (%)",
+    "monthlyPayment": "Monthly Payment",
+    "totalInterest": "Total Interest",
+    "totalPaid": "Total Paid",
+    "effectiveRate": "Effective Rate",
+    "comparison": "Comparison Chart",
+    "balanceOverTime": "Balance Over Time",
+    "summaryTable": "Summary Comparison",
+    "best": "Best",
+    "month": "Month",
+    "noScenarios": "Add a scenario to start comparing financing options",
+    "maxScenarios": "Maximum 3 scenarios"
+  },
+  "Companies": {
+    "title": "Companies",
+    "description": "Browse companies and their financial profiles",
+    "searchPlaceholder": "Search companies...",
+    "noCompanies": "No companies found",
+    "noCompaniesSub": "Companies will appear here when deals or contacts have company names.",
+    "deals": "{count} deals",
+    "contacts": "{count} contacts",
+    "totalValue": "Total Value",
+    "tabs": {
+      "overview": "Overview",
+      "loans": "Loans",
+      "contacts": "Contacts",
+      "financialHealth": "Financial Health"
+    },
+    "overview": {
+      "activeLoans": "Active Loans",
+      "totalLoanValue": "Total Loan Value",
+      "avgCreditScore": "Avg Credit Score",
+      "avgRiskRating": "Avg Risk Rating"
+    },
+    "loans": {
+      "title": "Title",
+      "stage": "Stage",
+      "value": "Value",
+      "riskRating": "Risk Rating",
+      "noLoans": "No loans for this company"
+    },
+    "contactsTab": {
+      "name": "Name",
+      "role": "Role",
+      "status": "Status",
+      "email": "Email",
+      "noContacts": "No contacts for this company"
+    },
+    "health": {
+      "portfolioValue": "Portfolio Value",
+      "weightedAvgRate": "Weighted Avg Rate",
+      "riskDistribution": "Risk Distribution",
+      "fundingHistory": "Funding History",
+      "noHistory": "No funding history available"
     }
   }
 }

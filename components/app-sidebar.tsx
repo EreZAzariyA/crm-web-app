@@ -12,6 +12,8 @@ import {
   ShieldCheck,
   BarChart2,
   ClipboardCheck,
+  Calculator,
+  Building2,
 } from "lucide-react"
 import {Link, usePathname, useRouter} from "@/i18n/routing"
 import { useEffect, useState } from "react"
@@ -50,6 +52,8 @@ const navItems = [
   { titleKey: "analytics",    href: "/analytics",    icon: BarChart2 },
   { titleKey: "underwriting", href: "/underwriting", icon: ClipboardCheck },
   { titleKey: "activity",     href: "/activity",     icon: Activity },
+  { titleKey: "simulation",   href: "/simulation",   icon: Calculator },
+  { titleKey: "companies",    href: "/companies",    icon: Building2 },
 ]
 
 const secondaryItems = [

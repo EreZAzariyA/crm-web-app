@@ -8,6 +8,8 @@
     "activity": "פעילות",
     "underwriting": "חיתום",
     "analytics": "אנליטיקה",
+    "simulation": "סימולציה",
+    "companies": "חברות",
     "admin": "ניהול",
     "settings": "הגדרות",
     "profile": "פרופיל",
@@ -76,6 +78,50 @@
       "collectionRate": "שיעור גבייה",
       "avgCreditScore": "דירוג אשראי ממוצע",
       "wtdAvgRate": "ריבית ממוצעת משוקללת"
+    },
+    "timeFilter": {
+      "7d": "7 ימים",
+      "30d": "30 ימים",
+      "90d": "90 ימים",
+      "12m": "12 חודשים",
+      "all": "הכל"
+    },
+    "financial": {
+      "totalAssets": "סה\"כ נכסים",
+      "totalLiabilities": "סה\"כ התחייבויות",
+      "netPortfolioValue": "שווי נקי של התיק",
+      "monthlyCashFlow": "תזרים חודשי",
+      "activeLoansCount": "{count} הלוואות פעילות",
+      "troubleLoansCount": "{count} בגבייה/כשל",
+      "assetsMinusLiabilities": "נכסים פחות התחייבויות",
+      "estimatedFromActive": "מוערך מהלוואות פעילות"
+    },
+    "creditGauge": {
+      "title": "דירוג אשראי תיק",
+      "scoredLoans": "{count} הלוואות מדורגות",
+      "noData": "אין נתוני דירוג אשראי",
+      "excellent": "מצוין",
+      "good": "טוב",
+      "fair": "בינוני",
+      "poor": "חלש"
+    },
+    "alerts": {
+      "title": "התראות סיכון",
+      "noAlerts": "אין התראות סיכון - התיק נראה בריא",
+      "ratingD": "ל-{title} דירוג סיכון גבוה (D)",
+      "highDti": "ל-{title} יחס DTI של {dti}% (מעל סף 43%)",
+      "troubleStage": "{title} בשלב {stage}",
+      "missingData": "ל-{title} חסרים נתוני דירוג אשראי ו-LTV"
+    },
+    "heatmap": {
+      "title": "מפת חום: ביצוע מול החזר",
+      "last12Months": "12 חודשים אחרונים",
+      "disbursed": "בוצעו",
+      "repaid": "נפרעו",
+      "loans": "הלוואות",
+      "noData": "אין נתוני תאריכים למפת חום",
+      "less": "פחות",
+      "more": "יותר"
     }
   },
   "Stages": {
@@ -770,6 +816,71 @@
         "exportCSV": "ייצוא CSV",
         "noData": "הגדר שיעור ריבית ותקופת הלוואה כדי ליצור את לוח הסילוקין."
       }
+    }
+  },
+  "Simulation": {
+    "title": "סימולציית מימון",
+    "description": "השוואת תרחישי מימון זה לצד זה",
+    "addScenario": "הוסף תרחיש",
+    "removeScenario": "הסר",
+    "scenario": "תרחיש {letter}",
+    "loanAmount": "סכום הלוואה ($)",
+    "interestRate": "ריבית שנתית (%)",
+    "loanTerm": "תקופת הלוואה (חודשים)",
+    "originationFee": "עמלת הקמה (%)",
+    "monthlyPayment": "תשלום חודשי",
+    "totalInterest": "סה\"כ ריבית",
+    "totalPaid": "סה\"כ תשלום",
+    "effectiveRate": "ריבית אפקטיבית",
+    "comparison": "תרשים השוואה",
+    "balanceOverTime": "יתרה לאורך זמן",
+    "summaryTable": "טבלת השוואה",
+    "best": "הטוב ביותר",
+    "month": "חודש",
+    "noScenarios": "הוסף תרחיש כדי להתחיל להשוות אפשרויות מימון",
+    "maxScenarios": "מקסימום 3 תרחישים"
+  },
+  "Companies": {
+    "title": "חברות",
+    "description": "עיין בחברות ובפרופילים הפיננסיים שלהן",
+    "searchPlaceholder": "חפש חברות...",
+    "noCompanies": "לא נמצאו חברות",
+    "noCompaniesSub": "חברות יופיעו כאן כאשר לעסקאות או לאנשי קשר יש שמות חברות.",
+    "deals": "{count} עסקאות",
+    "contacts": "{count} אנשי קשר",
+    "totalValue": "שווי כולל",
+    "tabs": {
+      "overview": "סקירה",
+      "loans": "הלוואות",
+      "contacts": "אנשי קשר",
+      "financialHealth": "בריאות פיננסית"
+    },
+    "overview": {
+      "activeLoans": "הלוואות פעילות",
+      "totalLoanValue": "סה\"כ שווי הלוואות",
+      "avgCreditScore": "דירוג אשראי ממוצע",
+      "avgRiskRating": "דירוג סיכון ממוצע"
+    },
+    "loans": {
+      "title": "כותרת",
+      "stage": "שלב",
+      "value": "שווי",
+      "riskRating": "דירוג סיכון",
+      "noLoans": "אין הלוואות לחברה זו"
+    },
+    "contactsTab": {
+      "name": "שם",
+      "role": "תפקיד",
+      "status": "סטטוס",
+      "email": "אימייל",
+      "noContacts": "אין אנשי קשר לחברה זו"
+    },
+    "health": {
+      "portfolioValue": "שווי תיק",
+      "weightedAvgRate": "ריבית ממוצעת משוקללת",
+      "riskDistribution": "התפלגות סיכונים",
+      "fundingHistory": "היסטוריית מימון",
+      "noHistory": "אין היסטוריית מימון זמינה"
     }
   }
 }
